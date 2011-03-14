@@ -1,14 +1,21 @@
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
+import os
+from google.appengine.ext.webapp import template
+
 
 class MainPage(webapp.RequestHandler):
   def get(self):
     user = users.get_current_user()
 
     if user:
-      self.response.headers['Content-Type'] = 'text/plain'
-      self.response.out.write('Hello, ' + user.nickname() + ', welcome to OPONGER!')
+      template_values = {
+        'nickname': user.nickname(),
+      }
+      path = os.path.join(os.path.dirname(__file__), 'index.html')
+      self.response.out.write(template.render(path, template_values))
+                              
     else:
       self.redirect(users.create_login_url(self.request.uri))
 
