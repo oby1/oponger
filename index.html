@@ -4,7 +4,7 @@
   </head>
   <body>
     {% if player %}
-    <p>Hi {{ player.pseudonym }}. Thanks for signing up.</p>
+    <p>Hi {{ player.pseudonym }}.</p>
     {% else %}
     <p>Hi {{ nickname }}. Sign up for OPONGER.</p>
     <form action="/signup" method="post">
