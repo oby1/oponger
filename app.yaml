@@ -8,6 +8,9 @@ handlers:
   static_dir: stylesheets
 - url: /images
   static_dir: images
+- url: /favicon\.ico
+  static_files: images/favicon.ico
+  upload: /images/favicon\.ico
 - url: /js
   static_dir: js
 - url: .*
