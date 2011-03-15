@@ -3,12 +3,16 @@
     <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
-    <p>Hello {{ nickname }}. Sign up for OPONGER.</p>
+    {% if player %}
+    <p>Hi {{ player.pseudonym }}. Thanks for signing up.</p>
+    {% else %}
+    <p>Hi {{ nickname }}. Sign up for OPONGER.</p>
     <form action="/signup" method="post">
       <label for="psudonym">Psudonym</label>
       <input type="text" name="pseudonym" />
       <input type="submit" value="Sign Up" />
     </form>
+    {% endif %}
     <img src="/images/oponger_logo_large.jpg" />
     <h3>Players:</h3>
     <ul>

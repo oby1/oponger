@@ -3,8 +3,8 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
 import os
+import sys
 from google.appengine.ext.webapp import template
-
 
 class MainPage(webapp.RequestHandler):
   def get(self):
@@ -13,6 +13,7 @@ class MainPage(webapp.RequestHandler):
 
     if user:
       template_values = {
+        'player'  : Player.get_by_key_name(user.user_id()),
         'nickname': user.nickname(),
         'players' : players,
       }
@@ -24,16 +25,17 @@ class MainPage(webapp.RequestHandler):
 
 class SignUp(webapp.RequestHandler):
   def post(self):
-    player = Player(pseudonym=self.request.get('pseudonym'))
-    if users.get_current_user():
-      player.user = users.get_current_user()
-    player.put()
+    user = users.get_current_user()
+    if not user:
+      self.redirect(users.create_login_url(self.request.uri))
+      
+    player = Player.get_or_insert(user.user_id(), user = user, pseudonym = self.request.get('pseudonym'))
     self.redirect('/')
 
 class Player(db.Model):
-  user = db.UserProperty()
-  pseudonym = db.StringProperty(multiline=True, required=True)
   date = db.DateTimeProperty(auto_now_add=True)
+  pseudonym = db.StringProperty(required=True)
+  user = db.UserProperty(required=True)
 
 application = webapp.WSGIApplication(
   [('/', MainPage),
