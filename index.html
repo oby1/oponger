@@ -7,7 +7,8 @@
     {% if player %}
     <div class="greeting">Hi {{ player.pseudonym }}.</div>
     {% else %}
-    <div class="greeting">Hi {{ nickname }}. Sign up for OPONGER.</div>
+    <div class="greeting">Hi {{ nickname }}.</div>
+    <h3>Sign up for OPONGER</h3>
     <form action="/signup" method="post">
       <label for="psudonym">Psudonym</label>
       <input type="text" name="pseudonym" />
