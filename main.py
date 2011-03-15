@@ -31,7 +31,16 @@ class SignUp(webapp.RequestHandler):
       self.redirect(users.create_login_url(self.request.uri))
       
     player = Player.get_or_insert(user.user_id(), user = user, pseudonym = self.request.get('pseudonym'))
+    send_email(user, "Welcome to OPONGER, {0}!".format(player.pseudonym), "We'll be in contact regarding your games.")
     self.redirect('/')
+
+from google.appengine.api import mail
+def send_email(user, subject, body):
+  mail.send_mail(
+      sender="OPONGER Support <oponger@opower.com>",
+      to = user.email(),
+      subject = subject,
+      body = body)
 
 application = webapp.WSGIApplication(
   [('/', MainPage),
