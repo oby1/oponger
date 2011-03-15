@@ -4,7 +4,18 @@
   </head>
   <body>
     <p>Hello {{ nickname }}. Sign up for OPONGER.</p>
+    <form action="/signup" method="post">
+      <label for="psudonym">Psudonym</label>
+      <input type="text" name="pseudonym" />
+      <input type="submit" value="Sign Up" />
+    </form>
     <img src="/images/oponger_logo_large.jpg" />
+    <h3>Players:</h3>
+    <ul>
+    {% for player in players %}
+      <li>{{ player.pseudonym }}</li>
+    {% endfor %}
+    </ul>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
     <script src="/js/main.js"></script>
