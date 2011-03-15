@@ -12,13 +12,20 @@ body {
   font-size: 50;
 }
 
+h1
+{
+  color:white;
+  background-color:purple;
+  padding:0.2em 0.6em;
+}
+
 .player
 {
   text-decoration:none;
   color:white;
-  background-color:purple;
+  background-color:#ff3300;
   padding:0.2em 0.6em;
   border-right:1px solid white;
 }
-.player:hover {background-color:#ff3300;}
+.player:hover {background-color:#7EB6FF;}
 
