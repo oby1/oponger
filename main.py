@@ -5,6 +5,7 @@ from google.appengine.ext import db
 import os
 import sys
 from google.appengine.ext.webapp import template
+from models import Player
 
 class MainPage(webapp.RequestHandler):
   def get(self):
@@ -31,11 +32,6 @@ class SignUp(webapp.RequestHandler):
       
     player = Player.get_or_insert(user.user_id(), user = user, pseudonym = self.request.get('pseudonym'))
     self.redirect('/')
-
-class Player(db.Model):
-  date = db.DateTimeProperty(auto_now_add=True)
-  pseudonym = db.StringProperty(required=True)
-  user = db.UserProperty(required=True)
 
 application = webapp.WSGIApplication(
   [('/', MainPage),
