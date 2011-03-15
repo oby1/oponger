@@ -3,21 +3,21 @@
     <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
+    <img class="logo" src="/images/oponger_logo_large.jpg" />
     {% if player %}
-    <p>Hi {{ player.pseudonym }}.</p>
+    <div class="greeting">Hi {{ player.pseudonym }}.</div>
     {% else %}
-    <p>Hi {{ nickname }}. Sign up for OPONGER.</p>
+    <div class="greeting">Hi {{ nickname }}. Sign up for OPONGER.</div>
     <form action="/signup" method="post">
       <label for="psudonym">Psudonym</label>
       <input type="text" name="pseudonym" />
       <input type="submit" value="Sign Up" />
     </form>
     {% endif %}
-    <img src="/images/oponger_logo_large.jpg" />
-    <h3>Players:</h3>
+    <h3>Czech out the competition::::</h3>
     <ul>
       {% for player in players %}
-      <li>{{ player.pseudonym }} ======= {{player.user.nickname}}</li>
+      <li class="player">{{ player.pseudonym }} ======= {{player.user.nickname}}</li>
       {% endfor %}
     </ul>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>

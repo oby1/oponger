@@ -1,4 +1,24 @@
 body {
   font-family: Verdana, Helvetica, sans-serif;
-  background-color: #DDDDDD;
 }
+
+.logo {
+  height: 200px;
+  width:  200px;
+  float: left;
+}
+
+.greeting {
+  font-size: 50;
+}
+
+.player
+{
+  text-decoration:none;
+  color:white;
+  background-color:purple;
+  padding:0.2em 0.6em;
+  border-right:1px solid white;
+}
+.player:hover {background-color:#ff3300;}
+
