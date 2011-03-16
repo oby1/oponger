@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}OPONGER ::: GAMES{% endblock %}
+
+{% block content %}
+
+  <h1>New Game::::</h1>
+  <form action="/game/new" method="post">
+    <input type="submit" value="New Game" />
+  </form>
+
+  <h1>Join a game:::</h1>
+  <ul>
+    {% for game in available_games %}
+    <li>
+       {{ game.player_1.pseudonym }}
+       <form action="/game/join" method="post">
+         <input type="hidden" name="game_key" value="{{ game.key }}" />
+         <input type="submit" value="Join" />
+       </form>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h1>Active games::::</h1>
+  <table>
+    <tr>
+      <th>Player 1</th>
+      <th>Player 2</th>
+    </tr>
+    {% for game in open_games %}
+    <tr class="game">
+      <td>{{ game.player_1.pseudonym }}</td>
+      <td>{{ game.player_2.pseudonym }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
