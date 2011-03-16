@@ -6,7 +6,8 @@ from google.appengine.ext.db import GeoPt
 import os
 import sys
 from google.appengine.ext.webapp import template
-from models import Player, LOCATIONS
+from models import Player
+from locations import LOCATIONS
 
 class MainPage(webapp.RequestHandler):
   def get(self):
