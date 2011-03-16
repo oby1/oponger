@@ -1,0 +1,49 @@
+OPONGER
+-------
+
+An app for managing the OPOWER Ping Pong league. Currently, the app
+supports:
+* Signing up for the league
+* Viewing the rules
+* Getting the latest info on league tournaments. Specifically, the Cinco de Mustache
+  OPONGER tournament where 8 players will contend for the OPONGER title and some
+  ridiculous prizes.
+
+Planned features:
+* Ranking
+* Game provisioning
+* Game result updating
+
+Live app URLs
+-------------
+http://oponger.opower.com
+http://oponger.appspot.com
+
+Implementation
+--------------
+The app is a basic Google App Engine Python application.
+
+
+Source Repository
+-----------------
+https://github.com/opower/oponger
+To check out oponger with git:
+    git clone git@github.com:opower/oponger.git /path/to/oponger
+
+This will set the github repo as the "origin". To push your local changes from the "master" branch:
+    git push origin master
+
+To push the app to Google App Engine:
+    appcfg.py update /path/to/oponger
+
+Running The App Locally
+-----------------------
+To run the app, you'll need to download and install Google App Engine Python SDK from:
+    http://code.google.com/appengine/downloads.html#Google_App_Engine_SDK_for_Python
+
+Once you've installed it, you can run it from the command line, using:
+    dev_appserver.py /path/to/oponger
+
+Or, you can fire it up using the handy dandy GoogleAppEngineLauncher, which provides handy links to the
+dashboard, logs, and more.
+
