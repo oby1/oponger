@@ -6,9 +6,9 @@ from google.appengine.ext.db import GeoPt
 import os
 import sys
 from google.appengine.ext.webapp import template
-from models import Player
+from lib.models import Player
 from locations import LOCATIONS
-from oponger_email import send_email
+from lib.oponger_email import send_email
 
 class MainPage(webapp.RequestHandler):
   def get(self):
