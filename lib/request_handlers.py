@@ -31,7 +31,6 @@ class MainPage(webapp.RequestHandler):
     if user:
       template_values = {
         'nickname'  : user.nickname(),
-        'players'   : Player.all(),
         'open_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
         'available_games': Game.gql("WHERE player_2 = NULL"),
         'locations' : LOCATIONS
@@ -42,6 +41,24 @@ class MainPage(webapp.RequestHandler):
         template_values['player'] = player
 
       render_to_response(self.response, "index.html", template_values)
+                              
+    else:
+      self.redirect(users.create_login_url(self.request.uri))
+
+class Players(webapp.RequestHandler):
+  def get(self):
+    user = users.get_current_user()
+
+    if user:
+      template_values = {
+        'players'   : Player.all(),
+      }
+
+      player = Player.get_by_key_name(user.user_id()) 
+      if player:
+        template_values['player'] = player
+
+      render_to_response(self.response, "players.html", template_values)
                               
     else:
       self.redirect(users.create_login_url(self.request.uri))

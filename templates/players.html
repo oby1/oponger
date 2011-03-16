@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}OPONGER ::: PLAYERS{% endblock %}
+
+{% block content %}
+
+  <h1>Czech out the competition::::</h1>
+  <table>
+    <tr>
+      <th>Pseudonym</th>
+      <th>Email</th>
+    </tr>
+    {% for player in players %}
+    <tr class="player">
+      <td>{{ player.pseudonym }}</td>
+      <td>{{ player.user.nickname }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
+
