@@ -20,6 +20,7 @@
     {% if player %}
     <h1>Your info</h1>
     <form action="/update_player" method="post">
+      <label for="psudonym">Psudonym</label>
       <input type="text" name="pseudonym" value="{{ player.pseudonym }}" />
       {% for location in locations %}
       <input
