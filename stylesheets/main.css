@@ -30,3 +30,13 @@ h1
 }
 .player:hover {background-color:#7EB6FF;}
 
+.game
+{
+  text-decoration:none;
+  color:white;
+  background-color:#0033FF;
+  padding:0.2em 0.6em;
+  border-right:1px solid white;
+}
+.game:hover {background-color:#7EB6FF;}
+

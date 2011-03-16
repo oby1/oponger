@@ -1,25 +1,30 @@
 <html>
+
   <head>
     <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
     <title>OPONGER</title>
   </head>
+
   <body>
     <img class="logo" src="/images/oponger_logo_large.jpg" />
+
     {% if player %}
     <div class="greeting">Hi {{ player.pseudonym }}.</div>
     {% else %}
     <div class="greeting">Hi {{ nickname }}.</div>
     <h3>Sign up for OPONGER</h3>
-    <form action="/signup" method="post">
+    <form action="/player/new" method="post">
       <label for="psudonym">Psudonym</label>
       <input type="text" name="pseudonym" />
       <input type="submit" value="Sign Up" />
     </form>
     {% endif %}
+
     <br style="clear:both">
+
     {% if player %}
     <h1>Your info</h1>
-    <form action="/update_player" method="post">
+    <form action="/player/update" method="post">
       <label for="psudonym">Psudonym</label>
       <input type="text" name="pseudonym" value="{{ player.pseudonym }}" />
       {% for location in locations %}
@@ -37,14 +42,17 @@
       <input type="submit" value="Update" />
     </form>
     {% endif %}
+
     <h1>Schedule</h1>
     <p>The final event will be on 5/5/2011 (cinco de mustache, baby!), commencing at 5:37PM right after the crowning of the stache. There WILL be a keg, so come out and watch/party!</p>
+
     <h1>Rulez::::</h1>
     <p>Preliminaries will commence as soon as we get our shit together. They'll be in WATT (i.e. Conference Room 2), and wherever the San Francisco folks figure out a spot to play (TBD). The eight players that servive the preliminaries will make it to the finals.</p>
 
     <p>Finals will be single elimination, with contenders playing for best 3/5 games. Again, 21 points wins a game.</p>
 
     <p>Beyond that, rules are for whiners and cheats. If you have questions or need a ref for something, talk to Sean Owen (a.k.a. sean@sucks.com). Also, here's <a href="http://www.pongworld.com/more/rules.php">a good reference if all else fails</a>.</p>
+
     <h1>Czech out the competition::::</h1>
     <table>
       <tr>
@@ -64,6 +72,42 @@
       </tr>
       {% endfor %}
     </table>
+
+    <h1>New Game::::</h1>
+    <form action="/game/new" method="post">
+      <input type="submit" value="New Game" />
+    </form>
+
+    <h1>Available Gamez::::</h1>
+    <table>
+      <tr>
+        <th>Player 1</th>
+        <th>Player 2</th>
+      </tr>
+      <p>Total number of available games: {{ available_games.count }}</p>
+      {% for game in available_games %}
+      <tr class="game">
+        <td>{{ game.player_1.pseudonym }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <h1>Open Gamez::::</h1>
+    <table>
+      <tr>
+        <th>Player 1</th>
+        <th>Player 2</th>
+      </tr>
+      <p>Total number of open games: {{ open_games.count }}</p>
+      {% for game in open_games %}
+      <tr class="game">
+        <td>{{ game.player_1.pseudonym }}</td>
+        <td>{{ game.player_2.pseudonym }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
     <script src="/js/main.js"></script>
+
   </body>
+
 </html>
