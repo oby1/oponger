@@ -1,112 +1,103 @@
-<html>
+{% extends "base.html" %}
 
-  <head>
-    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
-    <title>OPONGER</title>
-  </head>
+{% block title %}OPONGER ::: HOME{% endblock %}
 
-  <body>
-    <img class="logo" src="/images/oponger_logo_large.jpg" />
+{% block content %}
+  {% if player %}
+  <div class="greeting">Hi {{ player.pseudonym }}.</div>
+  {% else %}
+  <div class="greeting">Hi {{ nickname }}.</div>
+  <h3>Sign up for OPONGER</h3>
+  <form action="/player/new" method="post">
+    <label for="psudonym">Psudonym</label>
+    <input type="text" name="pseudonym" />
+    <input type="submit" value="Sign Up" />
+  </form>
+  {% endif %}
 
-    {% if player %}
-    <div class="greeting">Hi {{ player.pseudonym }}.</div>
-    {% else %}
-    <div class="greeting">Hi {{ nickname }}.</div>
-    <h3>Sign up for OPONGER</h3>
-    <form action="/player/new" method="post">
-      <label for="psudonym">Psudonym</label>
-      <input type="text" name="pseudonym" />
-      <input type="submit" value="Sign Up" />
-    </form>
-    {% endif %}
+  <br style="clear:both">
 
-    <br style="clear:both">
+  {% if player %}
+  <h1>Your info</h1>
+  <form action="/player/update" method="post">
+    <label for="psudonym">Psudonym</label>
+    <input type="text" name="pseudonym" value="{{ player.pseudonym }}" />
+    {% for location in locations %}
+    <input
+      type="radio"
+      name="location"
+      value="{{location.geoPt}}"
+      {% ifequal location.geoPt.lat player.location.lat %}
+      checked
+      {% endifequal %}
+      >
+      {{location.name}}
+    </input>
+    {% endfor %}
+    <input type="submit" value="Update" />
+  </form>
+  {% endif %}
 
-    {% if player %}
-    <h1>Your info</h1>
-    <form action="/player/update" method="post">
-      <label for="psudonym">Psudonym</label>
-      <input type="text" name="pseudonym" value="{{ player.pseudonym }}" />
+  <h1>Schedule</h1>
+  <p>The final event will be on 5/5/2011 (cinco de mustache, baby!), commencing at 5:37PM right after the crowning of the stache. There WILL be a keg, so come out and watch/party!</p>
+
+  <h1>Rulez::::</h1>
+  <p>Preliminaries will commence as soon as we get our shit together. They'll be in WATT (i.e. Conference Room 2), and wherever the San Francisco folks figure out a spot to play (TBD). The eight players that servive the preliminaries will make it to the finals.</p>
+
+  <p>Finals will be single elimination, with contenders playing for best 3/5 games. Again, 21 points wins a game.</p>
+
+  <p>Beyond that, rules are for whiners and cheats. If you have questions or need a ref for something, talk to Sean Owen (a.k.a. sean@sucks.com). Also, here's <a href="http://www.pongworld.com/more/rules.php">a good reference if all else fails</a>.</p>
+
+  <h1>Czech out the competition::::</h1>
+  <table>
+    <tr>
+      <th>Pseudonym</th>
+      <th>Email</th>
+      <th>Location</th>
+    </tr>
+    {% for player in players %}
+    <tr class="player">
+      <td>{{ player.pseudonym }}</td>
+      <td>{{ player.user.nickname }}</td>
       {% for location in locations %}
-      <input
-        type="radio"
-        name="location"
-        value="{{location.geoPt}}"
         {% ifequal location.geoPt.lat player.location.lat %}
-        checked
+        <td>{{location.name}}</td>
         {% endifequal %}
-        >
-        {{location.name}}
-      </input>
       {% endfor %}
-      <input type="submit" value="Update" />
-    </form>
-    {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
 
-    <h1>Schedule</h1>
-    <p>The final event will be on 5/5/2011 (cinco de mustache, baby!), commencing at 5:37PM right after the crowning of the stache. There WILL be a keg, so come out and watch/party!</p>
+  <h1>New Game::::</h1>
+  <form action="/game/new" method="post">
+    <input type="submit" value="New Game" />
+  </form>
 
-    <h1>Rulez::::</h1>
-    <p>Preliminaries will commence as soon as we get our shit together. They'll be in WATT (i.e. Conference Room 2), and wherever the San Francisco folks figure out a spot to play (TBD). The eight players that servive the preliminaries will make it to the finals.</p>
+  <h1>Join a game:::</h1>
+  <ul>
+    {% for game in available_games %}
+    <li>
+       {{ game.player_1.pseudonym }}
+       <form action="/game/join" method="post">
+         <input type="hidden" name="game_key" value="{{ game.key }}" />
+         <input type="submit" value="Join" />
+       </form>
+    </li>
+    {% endfor %}
+  </ul>
 
-    <p>Finals will be single elimination, with contenders playing for best 3/5 games. Again, 21 points wins a game.</p>
+  <h1>Active games::::</h1>
+  <table>
+    <tr>
+      <th>Player 1</th>
+      <th>Player 2</th>
+    </tr>
+    {% for game in open_games %}
+    <tr class="game">
+      <td>{{ game.player_1.pseudonym }}</td>
+      <td>{{ game.player_2.pseudonym }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
 
-    <p>Beyond that, rules are for whiners and cheats. If you have questions or need a ref for something, talk to Sean Owen (a.k.a. sean@sucks.com). Also, here's <a href="http://www.pongworld.com/more/rules.php">a good reference if all else fails</a>.</p>
-
-    <h1>Czech out the competition::::</h1>
-    <table>
-      <tr>
-        <th>Pseudonym</th>
-        <th>Email</th>
-        <th>Location</th>
-      </tr>
-      {% for player in players %}
-      <tr class="player">
-        <td>{{ player.pseudonym }}</td>
-        <td>{{ player.user.nickname }}</td>
-        {% for location in locations %}
-          {% ifequal location.geoPt.lat player.location.lat %}
-          <td>{{location.name}}</td>
-          {% endifequal %}
-        {% endfor %}
-      </tr>
-      {% endfor %}
-    </table>
-
-    <h1>New Game::::</h1>
-    <form action="/game/new" method="post">
-      <input type="submit" value="New Game" />
-    </form>
-
-    <h1>Join a game:::<h1>
-    <table>
-      <tr>
-        <th>Player 1</th>
-      </tr>
-      <p>Total number of available games: {{ available_games.count }}</p>
-      {% for game in available_games %}
-      <tr class="game">
-        <td>{{ game.player_1.pseudonym }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-    <h1>Open Gamez::::</h1>
-    <table>
-      <tr>
-        <th>Player 1</th>
-        <th>Player 2</th>
-      </tr>
-      <p>Total number of open games: {{ open_games.count }}</p>
-      {% for game in open_games %}
-      <tr class="game">
-        <td>{{ game.player_1.pseudonym }}</td>
-        <td>{{ game.player_2.pseudonym }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-
-    <script src="/js/main.js"></script>
-
-  </body>
-
-</html>
