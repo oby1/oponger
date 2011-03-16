@@ -21,7 +21,7 @@ PATH_TO_TEMPLATES = os.path.join(os.path.dirname(__file__),"../templates")
 
 def render_to_response(response, template_name, template_values):
   """Opens the given template and renders the values to the response."""
-  path = os.path.join(PATH_TO_TEMPLATES, 'index.html')
+  path = os.path.join(PATH_TO_TEMPLATES, template_name)
   response.out.write(template.render(path, template_values))
 
 class MainPage(webapp.RequestHandler):
@@ -45,6 +45,10 @@ class MainPage(webapp.RequestHandler):
                               
     else:
       self.redirect(users.create_login_url(self.request.uri))
+
+class Rulez(webapp.RequestHandler):
+  def get(self):
+    render_to_response(self.response, "rulez.html", None)
 
 class NewPlayer(webapp.RequestHandler):
   def post(self):
