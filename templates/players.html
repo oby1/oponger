@@ -9,11 +9,17 @@
     <tr>
       <th>Pseudonym</th>
       <th>Email</th>
+      <th>Location</th>
     </tr>
     {% for player in players %}
     <tr class="player">
       <td>{{ player.pseudonym }}</td>
       <td>{{ player.user.nickname }}</td>
+      {% for location in locations %}
+        {% ifequal location.geoPt.lat player.location.lat %}
+        <td>{{ location.name }}</td>
+        {% endifequal %}
+      {% endfor %}
     </tr>
     {% endfor %}
   </table>

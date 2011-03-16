@@ -71,6 +71,7 @@ class Players(webapp.RequestHandler):
     if user:
       template_values = {
         'players'   : Player.all(),
+        'locations' : LOCATIONS
       }
 
       player = Player.get_by_key_name(user.user_id()) 
