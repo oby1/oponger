@@ -17,7 +17,26 @@
     </form>
     {% endif %}
     <br style="clear:both">
-    <h1>Schedule:::</h1>
+    {% if player %}
+    <h1>Your info</h1>
+    <form action="/update_player" method="post">
+      <input type="text" name="pseudonym" value="{{ player.pseudonym }}" />
+      {% for location in locations %}
+      <input
+        type="radio"
+        name="location"
+        value="{{location.geoPt}}"
+        {% ifequal location.geoPt.lat player.location.lat %}
+        checked
+        {% endifequal %}
+        >
+        {{location.name}}
+      </input>
+      {% endfor %}
+      <input type="submit" value="Update" />
+    </form>
+    {% endif %}
+    <h1>Schedule<h1>
     <p>Finalz are on May 5, 2011</p>
     <h1>Rulez::::</h1>
     <p>Preliminaries will commence as soon as we get our shit together. They'll be in WATT (i.e. Conference Room 2), and wherever the San Francisco folks figure out a spot to play (TBD). The eight players that servive the preliminaries will make it to the finals.</p>
@@ -27,11 +46,24 @@
 
     <p>Beyond that, rules are for whiners and cheats. If you have questions or need a ref for something, talk to Sean Owen (a.k.a. sean@sucks.com). Also, here's <a href="http://www.pongworld.com/more/rules.php">a good reference if all else fails</a>.</p>
     <h1>Czech out the competition::::</h1>
-    <ul>
+    <table>
+      <tr>
+        <th>Pseudonym</th>
+        <th>Email</th>
+        <th>Location</th>
+      </tr>
       {% for player in players %}
-      <li class="player">{{ player.pseudonym }} ======= {{player.user.nickname}}</li>
+      <tr class="player">
+        <td>{{ player.pseudonym }}</td>
+        <td>{{ player.user.nickname }}</td>
+        {% for location in locations %}
+          {% ifequal location.geoPt.lat player.location.lat %}
+          <td>{{location.name}}</td>
+          {% endifequal %}
+        {% endfor %}
+      </tr>
       {% endfor %}
-    </ul>
+    </table>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
     <script src="/js/main.js"></script>

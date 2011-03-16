@@ -2,10 +2,11 @@ from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
+from google.appengine.ext.db import GeoPt
 import os
 import sys
 from google.appengine.ext.webapp import template
-from models import Player
+from models import Player, LOCATIONS
 
 class MainPage(webapp.RequestHandler):
   def get(self):
@@ -14,10 +15,15 @@ class MainPage(webapp.RequestHandler):
 
     if user:
       template_values = {
-        'player'  : Player.get_by_key_name(user.user_id()),
-        'nickname': user.nickname(),
-        'players' : players,
+        'nickname'  : user.nickname(),
+        'players'   : players,
+        'locations' : LOCATIONS
       }
+
+      player = Player.get_by_key_name(user.user_id()) 
+      if player:
+        template_values['player'] = player
+
       path = os.path.join(os.path.dirname(__file__), 'index.html')
       self.response.out.write(template.render(path, template_values))
                               
@@ -34,6 +40,19 @@ class SignUp(webapp.RequestHandler):
     send_email(user, "Welcome to OPONGER, %s!" % (player.pseudonym), "We'll be in contact regarding your games.")
     self.redirect('/')
 
+class UpdatePlayer(webapp.RequestHandler):
+  def post(self):
+    user = users.get_current_user()
+    if not user:
+      self.redirect(users.create_login_url(self.request.uri))
+      
+    player = Player.get_by_key_name(user.user_id()) 
+    player.pseudonym = self.request.get('pseudonym')
+    (lat, lon) = self.request.get('location').split(',')
+    player.location = GeoPt(lat, lon)
+    player.put()
+    self.redirect('/')
+
 from google.appengine.api import mail
 def send_email(user, subject, body):
   # TODO: create an opongersupport@opower.com user, give the Admin access to the Google App, and change the sender to that
@@ -46,7 +65,8 @@ def send_email(user, subject, body):
 
 application = webapp.WSGIApplication(
   [('/', MainPage),
-  ('/signup', SignUp)],
+  ('/signup', SignUp),
+  ('/update_player', UpdatePlayer)],
   debug=True)
 
 def main():
