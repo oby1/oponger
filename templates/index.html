@@ -4,94 +4,13 @@
 
 {% block content %}
 
-  {% if player %}
+  {% if player.pseudonym %}
   <div class="greeting">Hi {{ player.pseudonym }}.</div>
   {% else %}
-  <div class="greeting">Hi {{ nickname }}.</div>
-  <h3>Sign up for OPONGER</h3>
-  <form action="/player/new" method="post">
-    <label for="psudonym">Psudonym</label>
-    <input type="text" name="pseudonym" />
-    <input type="submit" value="Sign Up" />
-  </form>
+  <div class="greeting">Hi {{ user.nickname }}. Looks like you haven't set up your pseudonym. Head to the <a href="/profile">profile</a> page to get set up!</div>
   {% endif %}
 
-  <br style="clear:both">
+  <p>OPing, OPong, baby. Get your paddle ready and your game on, because
+  OPOWER's ping pong torunament is back!</p>
 
-  {% if player %}
-  <h1>Your info</h1>
-  <form action="/player/update" method="post">
-    <label for="psudonym">Psudonym</label>
-    <input type="text" name="pseudonym" value="{{ player.pseudonym }}" />
-    {% for location in locations %}
-    <input
-      type="radio"
-      name="location"
-      value="{{location.geoPt}}"
-      {% ifequal location.geoPt.lat player.location.lat %}
-      checked
-      {% endifequal %}
-      >
-      {{location.name}}
-    </input>
-    {% endfor %}
-    <input type="submit" value="Update" />
-  </form>
-  {% endif %}
-
-  <h1>Schedule</h1>
-  <p>The final event will be on 5/5/2011 (cinco de mustache, baby!), commencing at 5:37PM right after the crowning of the stache. There WILL be a keg, so come out and watch/party!</p>
-
-  <h1>Czech out the competition::::</h1>
-  <table>
-    <tr>
-      <th>Pseudonym</th>
-      <th>Email</th>
-      <th>Location</th>
-    </tr>
-    {% for player in players %}
-    <tr class="player">
-      <td>{{ player.pseudonym }}</td>
-      <td>{{ player.user.nickname }}</td>
-      {% for location in locations %}
-        {% ifequal location.geoPt.lat player.location.lat %}
-        <td>{{location.name}}</td>
-        {% endifequal %}
-      {% endfor %}
-    </tr>
-    {% endfor %}
-  </table>
-
-  <h1>New Game::::</h1>
-  <form action="/game/new" method="post">
-    <input type="submit" value="New Game" />
-  </form>
-
-  <h1>Join a game:::</h1>
-  <ul>
-    {% for game in available_games %}
-    <li>
-       {{ game.player_1.pseudonym }}
-       <form action="/game/join" method="post">
-         <input type="hidden" name="game_key" value="{{ game.key }}" />
-         <input type="submit" value="Join" />
-       </form>
-    </li>
-    {% endfor %}
-  </ul>
-
-  <h1>Active games::::</h1>
-  <table>
-    <tr>
-      <th>Player 1</th>
-      <th>Player 2</th>
-    </tr>
-    {% for game in open_games %}
-    <tr class="game">
-      <td>{{ game.player_1.pseudonym }}</td>
-      <td>{{ game.player_2.pseudonym }}</td>
-    </tr>
-    {% endfor %}
-  </table>
 {% endblock %}
-

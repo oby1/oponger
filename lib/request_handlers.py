@@ -50,10 +50,14 @@ class PlayerDetails(BaseHandler):
 
     additional_values = {
       'player_to_show'  : player_to_show,
-      'is_current_user' : self.player == player_to_show,
     }
+
     self.template_values.update(additional_values)
     self.render_to_response("player.html")
+
+class Profile(BaseHandler):
+  def DoGet(self):
+    self.render_to_response("profile.html")
 
 class Players(BaseHandler):
   def DoGet(self):
@@ -69,27 +73,13 @@ class Rulez(BaseHandler):
   def DoGet(self):
     self.render_to_response("rulez.html")
 
-class NewPlayer(BaseHandler):
-  def DoPost(self):
-    player = Player.get_or_insert(user.user_id(), user = user, pseudonym = self.request.get('pseudonym'))
-    send_email(user,
-        """| . |  Welcome to OPONGER, %s! :)""" % (player.pseudonym),
-        """Visit http://oponger.opower.com to check out the competition,
-        start your first game, or change your details. Happy ponging! :)\n
-        |\n
-             .\n
-        \n
-                     |
-        """)
-    self.redirect('/')
-
 class UpdatePlayer(BaseHandler):
   def DoPost(self):
     player.pseudonym = self.request.get('pseudonym')
     (lat, lon) = self.request.get('location').split(',')
     player.location = GeoPt(lat, lon)
     player.put()
-    self.redirect('/')
+    self.redirect('/profile')
 
 class NewGame(BaseHandler):
   def DoPost(self):

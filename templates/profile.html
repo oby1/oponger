@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ player.pseudonym }}{% endblock %}
+
+{% block content %}
+  
+  <h1>{{ player.pseudonym }}</h1>
+
+  <h1>Update your info</h1>
+  <form action="/player/update" method="post">
+    <label for="psudonym">Psudonym</label>
+    <input type="text" name="pseudonym" value="{{ player.pseudonym }}" />
+    {% for location in locations %}
+    <input
+      type="radio"
+      name="location"
+      value="{{location.geoPt}}"
+      {% ifequal location.geoPt.lat player.location.lat %}
+      checked
+      {% endifequal %}
+      >
+      {{location.name}}
+    </input>
+    {% endfor %}
+    <input type="submit" value="Update" />
+  </form>
+  <p>{{ player.pseudonym }}</p>
+  <p>{{ player.user.nickname }}</p>
+  {% for location in locations %}
+    {% ifequal location.geoPt.lat player.location.lat %}
+    <p>{{location.name}}</p>
+    {% endifequal %}
+  {% endfor %}
+
+{% endblock %}
+

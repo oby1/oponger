@@ -9,8 +9,8 @@ from locations import DC
 
 class Player(db.Model):
   date = db.DateTimeProperty(auto_now_add=True)
-  pseudonym = db.StringProperty(required=True)
   user = db.UserProperty(required=True)
+  pseudonym = db.StringProperty()
   location = db.GeoPtProperty(default=DC['geoPt'])
   def __str__(self):
     return "[Psuedonym: %s, Nickname: %s]" % (self.pseudonym, self.user.nickname())

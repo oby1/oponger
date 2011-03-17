@@ -21,7 +21,8 @@ class BaseHandler(webapp.RequestHandler):
   """
   def __init__(self):
     self.user = users.get_current_user()
-    self.player = Player.get_by_key_name(self.user.user_id())
+    # Creates a player if one does not already exist. No signup!
+    self.player = Player.get_or_insert(self.user.user_id(), user = self.user)
     self.template_values = {
           'user'       : self.user,
           'player'     : self.player, 
