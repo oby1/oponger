@@ -7,92 +7,74 @@ import sys
 import logging
 
 from google.appengine.ext import webapp
-from google.appengine.ext.webapp import template
 from google.appengine.api import users
 from google.appengine.ext import db
-from google.appengine.ext.db import GeoPt
+from google.appengine.ext.db import GeoPt, Key
 
 from oponger_email import send_email
 from locations import LOCATIONS
 from models import Player, Game
+from base_handler import BaseHandler
 
-"""Templates live in this path-relative directory."""
-PATH_TO_TEMPLATES = os.path.join(os.path.dirname(__file__),"../templates")
+class MainPage(BaseHandler):
+  def DoGet(self):
 
-def render_to_response(response, template_name, template_values):
-  """Opens the given template and renders the values to the response."""
-  path = os.path.join(PATH_TO_TEMPLATES, template_name)
-  response.out.write(template.render(path, template_values))
+    additional_values = {
+      'open_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
+      'available_games': Game.gql("WHERE player_2 = NULL"),
+      'locations' : LOCATIONS
+    }
+    
+    self.template_values.update(additional_values)
+    self.render_to_response("index.html")
 
-class MainPage(webapp.RequestHandler):
-  def get(self):
-    user = users.get_current_user()
+class Games(BaseHandler):
+  def DoGet(self):
 
-    if user:
-      template_values = {
-        'nickname'  : user.nickname(),
-        'open_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
-        'available_games': Game.gql("WHERE player_2 = NULL"),
-        'locations' : LOCATIONS
-      }
+    additional_values = {
+      'open_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
+      'available_games': Game.gql("WHERE player_2 = NULL"),
+    }
 
-      player = Player.get_by_key_name(user.user_id()) 
-      if player:
-        template_values['player'] = player
+    self.template_values.update(additional_values)
+    self.render_to_response("games.html")
 
-      render_to_response(self.response, "index.html", template_values)
-                              
-    else:
-      self.redirect(users.create_login_url(self.request.uri))
+class PlayerDetails(BaseHandler):
+  def DoGet(self, player_key_name):
+    player_to_show = Player.get_by_key_name(player_key_name)
 
-class Games(webapp.RequestHandler):
-  def get(self):
-    user = users.get_current_user()
+    logging.info('Getting player %s' % player_to_show)
+    if not self.player:
+      self.error(404)
+      self.response.out.write("""<strong>No player with key %s.
+      Try looking through the <a href="/players">list of players</a>.</strong>"""
+      % player_key)
 
-    if user:
-      template_values = {
-        'open_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
-        'available_games': Game.gql("WHERE player_2 = NULL"),
-      }
+    additional_values = {
+      'player_to_show'  : player_to_show,
+      'is_current_user' : self.player == player_to_show,
+      'locations'       : LOCATIONS
+    }
+    self.template_values.update(additional_values)
+    self.render_to_response("player.html")
 
-      player = Player.get_by_key_name(user.user_id()) 
-      if player:
-        template_values['player'] = player
+class Players(BaseHandler):
+  def DoGet(self):
 
-      render_to_response(self.response, "games.html", template_values)
-                              
-    else:
-      self.redirect(users.create_login_url(self.request.uri))
+    additional_values = {
+      'players'   : Player.all(),
+      'locations' : LOCATIONS
+    }
 
-class Players(webapp.RequestHandler):
-  def get(self):
-    user = users.get_current_user()
+    self.template_values.update(additional_values)
+    self.render_to_response("players.html")
 
-    if user:
-      template_values = {
-        'players'   : Player.all(),
-        'locations' : LOCATIONS
-      }
+class Rulez(BaseHandler):
+  def DoGet(self):
+    self.render_to_response("rulez.html")
 
-      player = Player.get_by_key_name(user.user_id()) 
-      if player:
-        template_values['player'] = player
-
-      render_to_response(self.response, "players.html", template_values)
-                              
-    else:
-      self.redirect(users.create_login_url(self.request.uri))
-
-class Rulez(webapp.RequestHandler):
-  def get(self):
-    render_to_response(self.response, "rulez.html", None)
-
-class NewPlayer(webapp.RequestHandler):
-  def post(self):
-    user = users.get_current_user()
-    if not user:
-      self.redirect(users.create_login_url(self.request.uri))
-      
+class NewPlayer(BaseHandler):
+  def DoPost(self):
     player = Player.get_or_insert(user.user_id(), user = user, pseudonym = self.request.get('pseudonym'))
     send_email(user,
         """| . |  Welcome to OPONGER, %s! :)""" % (player.pseudonym),
@@ -105,27 +87,18 @@ class NewPlayer(webapp.RequestHandler):
         """)
     self.redirect('/')
 
-class UpdatePlayer(webapp.RequestHandler):
-  def post(self):
-    user = users.get_current_user()
-    if not user:
-      self.redirect(users.create_login_url(self.request.uri))
-      
-    player = Player.get_by_key_name(user.user_id()) 
+class UpdatePlayer(BaseHandler):
+  def DoPost(self):
     player.pseudonym = self.request.get('pseudonym')
     (lat, lon) = self.request.get('location').split(',')
     player.location = GeoPt(lat, lon)
     player.put()
     self.redirect('/')
 
-class NewGame(webapp.RequestHandler):
-  def post(self):
-    user = users.get_current_user()
-    if not user:
-      self.redirect(users.create_login_url(self.request.uri))
-
-    player = Player.get_by_key_name(user.user_id())
-    if not player:
+class NewGame(BaseHandler):
+  def DoPost(self):
+    if not self.player:
+      # TODO: replace with an http error
       raise "A user must be a player to start a game."
 
     game = Game(player_1 = player)

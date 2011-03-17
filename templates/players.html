@@ -13,7 +13,7 @@
     </tr>
     {% for player in players %}
     <tr class="player">
-      <td>{{ player.pseudonym }}</td>
+      <td><a href="/player/{{player.key.name}}">{{ player.pseudonym }}</a></td>
       <td>{{ player.user.nickname }}</td>
       {% for location in locations %}
         {% ifequal location.geoPt.lat player.location.lat %}
