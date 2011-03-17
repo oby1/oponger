@@ -31,18 +31,14 @@ class BaseHandler(webapp.RequestHandler):
         }
     logging.debug("Setting up template values %s" % (self.template_values))
 
-  def Setup(self):
-    logging.debug("Setting up")
-
   def get(self, *args):
-    self.Setup()
     # call the derived class' 'DoGet' method that actually has 
     # the logic inside it
     self.DoGet(*args)
 
   def post(self, *args):
-    self.Setup()
     # call the derived class' 'DoPost' method 
+    logging.debug("POST request body: %s" % self.request.body)
     self.DoPost(*args)
 
   def render_to_response(self, template_name):
@@ -51,4 +47,3 @@ class BaseHandler(webapp.RequestHandler):
     path = os.path.join(PATH_TO_TEMPLATES, template_name)
     logging.debug("Rendering template_values %s to template %s." % (self.template_values, template_name))
     self.response.out.write(template.render(path, self.template_values))
-
