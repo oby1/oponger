@@ -75,6 +75,7 @@ class Rulez(BaseHandler):
 
 class UpdatePlayer(BaseHandler):
   def DoPost(self):
+    logging.info("Updating player info")
     player.pseudonym = self.request.get('pseudonym')
     (lat, lon) = self.request.get('location').split(',')
     player.location = GeoPt(lat, lon)
@@ -83,12 +84,8 @@ class UpdatePlayer(BaseHandler):
 
 class NewGame(BaseHandler):
   def DoPost(self):
-    if not self.player:
-      # TODO: replace with an http error
-      raise "A user must be a player to start a game."
-
-    game = Game(player_1 = player)
+    game = Game(player_1 = self.player)
     game.put()
     logging.info("Creating new game %s" % (game))
-    self.redirect('/')
+    self.redirect('/games')
 
