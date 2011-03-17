@@ -104,3 +104,17 @@ class JoinGame(BaseHandler):
     logging.info("Player %s joined game %s" % (self.player, game))
     self.redirect('/games')
 
+class CancelGame(BaseHandler):
+  def DoPost(self):
+    game = Game.get_by_id(long(self.request.get('game_id')))
+
+    if game.player_1.key() != self.player.key():
+      raise Exception("You can't delete a game you don't own, duderino!")
+
+    if game.completed_date != None:
+      raise Exception("You can't delete a game that's already been completed, duderino!")
+
+    game.delete()
+    logging.info("Player %s deleted game %s" % (self.player, game))
+    self.redirect('/games')
+

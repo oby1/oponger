@@ -11,7 +11,8 @@ from lib.request_handlers import MainPage,\
   Games,\
   PlayerDetails,\
   Profile,\
-  JoinGame
+  JoinGame,\
+  CancelGame
 
 application = webapp.WSGIApplication(
   [('/', MainPage),
@@ -22,7 +23,8 @@ application = webapp.WSGIApplication(
   (r'/player/(?P<player_key_name>\w+)', PlayerDetails),
   ('/games', Games),
   ('/game/new', NewGame),
-  ('/game/join', JoinGame)],
+  ('/game/join', JoinGame),
+  ('/game/cancel', CancelGame)],
   debug=True)
 
 def main():
