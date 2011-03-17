@@ -45,17 +45,6 @@ class BaseHandler(webapp.RequestHandler):
     # call the derived class' 'DoPost' method 
     self.DoPost(*args)
 
-  def DoGet(self, *args):
-    ''' derived classes override this method and 
-    put all of their GET logic inside. Base class does nothing.'''
-    pass
-
-  def DoPost(self, *args):
-    ''' derived classes override this method and 
-    put all of their POST logic inside. Base class does nothing.'''
-    logging.info("Doing POST")
-    pass
-
   def render_to_response(self, template_name):
     """Opens the given template and renders the values to the response,
     along with the resulting template_values."""
