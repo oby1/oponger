@@ -34,8 +34,6 @@ class BaseHandler(webapp.RequestHandler):
   def get(self, *args):
     # call the derived class' 'DoGet' method that actually has 
     # the logic inside it
-    if(self.user.nickname() == "dylan.greene@opower.com"):
-      self.redirect('http://www.mediabistro.com/prnewser/files/original/Douche.jpg')
     self.DoGet(*args)
 
   def post(self, *args):
