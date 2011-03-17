@@ -3,16 +3,23 @@ OPONGER
 
 An app for managing the OPOWER Ping Pong league. Currently, the app
 supports:
-* Signing up for the league
 * Viewing the rules
 * Getting the latest info on league tournaments. Specifically, the Cinco de Mustache
   OPONGER tournament where 8 players will contend for the OPONGER title and some
   ridiculous prizes.
+* Updating profile info: location (SF or DC) and pseudonym
+* Creating a new game
+* Viewing all "available" games, i.e. games you can join
+* Viewing all "active" games, i.e. games people are playing, but have not been completed
+* Viewing all payers
 
 Planned features:
-* Ranking
-* Game provisioning
+* Joining a game
 * Game result updating
+* Viewing all completed games
+* Viewing games by player
+* Basic player stats
+* Ranking
 
 Live app URLs
 -------------
