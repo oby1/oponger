@@ -5,6 +5,7 @@ or Django "views".
 import os
 import sys
 import logging
+from cgi import escape
 
 from google.appengine.ext import webapp
 from google.appengine.api import users
@@ -76,7 +77,7 @@ class Rulez(BaseHandler):
 class UpdateProfile(BaseHandler):
   def DoPost(self):
     logging.info("Updating player info")
-    self.player.pseudonym = self.request.get('pseudonym')
+    self.player.pseudonym = escape(self.request.get('pseudonym'))
     (lat, lon) = self.request.get('location').split(',')
     self.player.location = GeoPt(lat, lon)
     self.player.put()
