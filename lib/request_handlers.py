@@ -73,13 +73,13 @@ class Rulez(BaseHandler):
   def DoGet(self):
     self.render_to_response("rulez.html")
 
-class UpdatePlayer(BaseHandler):
+class UpdateProfile(BaseHandler):
   def DoPost(self):
     logging.info("Updating player info")
-    player.pseudonym = self.request.get('pseudonym')
+    self.player.pseudonym = self.request.get('pseudonym')
     (lat, lon) = self.request.get('location').split(',')
-    player.location = GeoPt(lat, lon)
-    player.put()
+    self.player.location = GeoPt(lat, lon)
+    self.player.put()
     self.redirect('/profile')
 
 class NewGame(BaseHandler):

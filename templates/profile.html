@@ -7,7 +7,7 @@
   <h1>{{ player.pseudonym }}</h1>
 
   <h1>Update your info</h1>
-  <form action="/player/update" method="post">
+  <form action="/profile/update" method="post">
     <label for="psudonym">Psudonym</label>
     <input type="text" name="pseudonym" value="{{ player.pseudonym }}" />
     {% for location in locations %}
