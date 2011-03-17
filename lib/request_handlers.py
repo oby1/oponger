@@ -90,3 +90,17 @@ class NewGame(BaseHandler):
     logging.info("Creating new game %s" % (game))
     self.redirect('/games')
 
+class JoinGame(BaseHandler):
+  def DoPost(self):
+    game = Game.get_by_id(long(self.request.get('game_id')))
+
+    if game.player_1 == self.player:
+      raise Exception("You can't join your own game, duderino!")
+    if game.player_2:
+      raise Exception("Oops, looks like someone already joined this game, duderino!")
+
+    game.player_2 = self.player
+    game.put()
+    logging.info("Player %s joined game %s" % (self.player, game))
+    self.redirect('/games')
+

@@ -13,11 +13,13 @@
   <ul>
     {% for game in available_games %}
     <li>
-       {{ game.player_1.pseudonym }}
+       Owner: {{ game.player_1.pseudonym }}
+       {% ifnotequal player.user game.player_1.user %}
        <form action="/game/join" method="post">
-         <input type="hidden" name="game_key" value="{{ game.key }}" />
+         <input type="hidden" name="game_id" value="{{ game.key.id }}" />
          <input type="submit" value="Join" />
        </form>
+       {% endifnotequal %}
     </li>
     {% endfor %}
   </ul>

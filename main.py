@@ -1,7 +1,15 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-from lib.request_handlers import MainPage, UpdateProfile, NewGame, Rulez, Players, Games, PlayerDetails, Profile
+from lib.request_handlers import MainPage,\
+  UpdateProfile,\
+  NewGame,\
+  Rulez,\
+  Players,\
+  Games,\
+  PlayerDetails,\
+  Profile,\
+  JoinGame
 
 application = webapp.WSGIApplication(
   [('/', MainPage),
@@ -11,7 +19,8 @@ application = webapp.WSGIApplication(
   ('/players', Players),
   (r'/player/(?P<player_key_name>\w+)', PlayerDetails),
   ('/games', Games),
-  ('/game/new', NewGame)],
+  ('/game/new', NewGame),
+  ('/game/join', JoinGame)],
   debug=True)
 
 def main():
