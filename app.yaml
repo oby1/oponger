@@ -15,3 +15,5 @@ handlers:
   static_dir: js
 - url: .*
   script: main.py
+  login: required
+
