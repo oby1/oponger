@@ -12,7 +12,6 @@ from google.appengine.ext import db
 from google.appengine.ext.db import GeoPt, Key
 
 from oponger_email import send_email
-from locations import LOCATIONS
 from models import Player, Game
 from base_handler import BaseHandler
 
@@ -22,7 +21,6 @@ class MainPage(BaseHandler):
     additional_values = {
       'open_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
       'available_games': Game.gql("WHERE player_2 = NULL"),
-      'locations' : LOCATIONS
     }
     
     self.template_values.update(additional_values)
@@ -53,7 +51,6 @@ class PlayerDetails(BaseHandler):
     additional_values = {
       'player_to_show'  : player_to_show,
       'is_current_user' : self.player == player_to_show,
-      'locations'       : LOCATIONS
     }
     self.template_values.update(additional_values)
     self.render_to_response("player.html")
@@ -63,7 +60,6 @@ class Players(BaseHandler):
 
     additional_values = {
       'players'   : Player.all(),
-      'locations' : LOCATIONS
     }
 
     self.template_values.update(additional_values)

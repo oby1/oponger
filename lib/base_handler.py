@@ -8,6 +8,7 @@ from google.appengine.api import users
 from google.appengine.api.users import create_logout_url
 
 from models import Player
+from locations import LOCATIONS
 
 """Templates live in this path-relative directory."""
 PATH_TO_TEMPLATES = os.path.join(os.path.dirname(__file__),"../templates")
@@ -25,6 +26,7 @@ class BaseHandler(webapp.RequestHandler):
           'user'       : self.user,
           'player'     : self.player, 
           'logout_url' : create_logout_url('/'),
+          'locations'  : LOCATIONS
         }
     logging.info("Setting up template values %s" % (self.template_values))
 
