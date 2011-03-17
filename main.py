@@ -1,3 +1,5 @@
+import logging
+
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
@@ -24,6 +26,7 @@ application = webapp.WSGIApplication(
   debug=True)
 
 def main():
+  logging.getLogger().setLevel(logging.DEBUG)
   run_wsgi_app(application)
 
 if __name__ == "__main__":
