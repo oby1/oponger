@@ -25,7 +25,7 @@ def validate_min_score(player_1_score, player_2_score):
 but got %s and %s points for players.""" % (POINTS_TO_WIN, player_1_score, player_2_score))
 
 def validate_score_diff(player_1_score, player_2_score):
-  if (player_1_score > POINTS_TO_WIN or player_2_score > POINTS_TO_WIN)\
+  if (player_1_score > POINTS_TO_WIN - 1 or player_2_score > POINTS_TO_WIN - 1)\
       and math.fabs(player_1_score - player_2_score) < POINT_DIFF_FOR_WIN:
     raise Exception("Invalid win difference, got %s and %s points for players."
     % (player_1_score, player_2_score))

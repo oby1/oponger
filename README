@@ -55,3 +55,8 @@ Once you've installed it, you can run it from the command line, using:
 Or, you can fire it up using the handy dandy GoogleAppEngineLauncher, which provides handy links to the
 dashboard, logs, and more.
 
+Testing
+-------
+To run a unit test:
+    cd test
+    python <test_name>
