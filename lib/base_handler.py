@@ -3,6 +3,7 @@ import os
 import sys
 
 # Django 1.2 gives better templating
+# see http://code.google.com/p/googleappengine/source/browse/trunk/python/google/appengine/ext/webapp/template.py#53
 from google.appengine.dist import use_library
 use_library('django', '1.2')
 
