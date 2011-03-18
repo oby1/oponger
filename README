@@ -55,6 +55,20 @@ Once you've installed it, you can run it from the command line, using:
 Or, you can fire it up using the handy dandy GoogleAppEngineLauncher, which provides handy links to the
 dashboard, logs, and more.
 
+Working With IntelliJ
+---------------------
+Once you've got the project checked out and Google App Engine Python SDK installed,
+you can work with th project through IntelliJ.
+
+* Install the Python Plugin
+* Create a New Project
+** Choose New Project, Python Module
+** + to coonfigure Python SDK
+** Select your version of Python. On a Mac, this will be under System/Library/Frameworks/Versions/2.6/python
+** Under "Please select the desired technologies", Select Google App Engine
+** If asked for the Google App Engine SDK, under OSX that should be in
+    /Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine
+
 Testing
 -------
 To run a unit test:
