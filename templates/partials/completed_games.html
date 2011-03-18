@@ -6,6 +6,7 @@
     <th>Score</th>
     <th>Challenger</th>
     <th>Score</th>
+    <th>Completed</th>
   </tr>
   {% for game in completed_games %}
   <tr class="game">
@@ -33,6 +34,7 @@
       </a>
     </td>
     <td>{{ game.player_2_score }}</td>
+    <td>{{ game.completed_date }}</td>
   </tr>
   {% endfor %}
 </table>

@@ -24,7 +24,7 @@ class MainPage(BaseHandler):
   def DoGet(self):
 
     additional_values = {
-      'active_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
+      'active_games': Game.gql("WHERE player_2 != NULL AND completed_date = NULL"),
       'available_games': Game.gql("WHERE player_2 = NULL"),
     }
 
@@ -35,9 +35,9 @@ class Games(BaseHandler):
   def DoGet(self):
 
     additional_values = {
-      'active_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
-      'available_games': Game.gql("WHERE player_2 = NULL"),
-      'completed_games': Game.gql("WHERE completed_date != NULL"),
+      'active_games': Game.all_active(),
+      'available_games': Game.all_available(),
+      'completed_games': Game.all_completed(),
     }
 
     self.template_values.update(additional_values)
@@ -55,15 +55,15 @@ class PlayerDetails(BaseHandler):
 
     games = player_to_show.game_set_1.order("created_date").fetch(MAX_RECORDS, 0)
     games.extend(player_to_show.game_set_2.order('created_date').fetch(MAX_RECORDS, 0))
-
     games = sorted(games, key = lambda game: game.created_date, reverse=True)
 
     logging.info("Player %s has games: %s" % (player_to_show, games))
 
-    # TODO: sort these
     available_games = [game for game in games if game.is_available()]
-    completed_games = [game for game in games if game.is_completed()]
     active_games = [game for game in games if game.is_active()]
+
+    completed_games = [game for game in games if game.is_completed()]
+    completed_games = sorted(completed_games, key = lambda game: game.completed_date, reverse=True)
 
     additional_values = {
       'player_to_show'  : player_to_show,

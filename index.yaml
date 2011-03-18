@@ -13,6 +13,12 @@ indexes:
 - kind: Game
   properties:
   - name: completed_date
+  - name: created_date
+    direction: desc
+
+- kind: Game
+  properties:
+  - name: completed_date
   - name: player_1
   - name: player_2
 
@@ -20,6 +26,13 @@ indexes:
   properties:
   - name: completed_date
   - name: player_2
+
+- kind: Game
+  properties:
+  - name: completed_date
+  - name: player_2
+  - name: created_date
+    direction: desc
 
 - kind: Game
   properties:
@@ -41,3 +54,9 @@ indexes:
   properties:
   - name: player_2
   - name: created_date
+
+- kind: Game
+  properties:
+  - name: player_2
+  - name: created_date
+    direction: desc

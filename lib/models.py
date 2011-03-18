@@ -39,3 +39,15 @@ class Game(db.Model):
   def is_completed(self):
     return self.completed_date != None
 
+  @staticmethod
+  def all_active():
+    return Game.gql("WHERE player_2 != NULL AND completed_date = NULL ORDER BY player_2, created_date DESC")
+
+  @staticmethod
+  def all_available():
+    return Game.gql("WHERE player_2 = NULL ORDER BY created_date DESC")
+
+  @staticmethod
+  def all_completed():
+    return Game.gql("WHERE completed_date != NULL ORDER BY completed_date, created_date DESC")
+
