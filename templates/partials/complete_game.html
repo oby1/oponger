@@ -1,0 +1,6 @@
+<form action="/game/complete" method="post">
+  <input type="text" name="player_1_score" />
+  <input type="text" name="player_2_score" />
+  <input type="hidden" name="game_id" value="{{ game.key.id }}" />
+  <input type="submit" value="Complete" />
+</form>

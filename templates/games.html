@@ -9,6 +9,33 @@
     <input type="submit" value="New Game" />
   </form>
 
+  <h1>Active games::::</h1>
+  <table>
+    <tr>
+      <th>Owner</th>
+      <th>Challenger</th>
+    </tr>
+    {% for game in open_games %}
+    <tr class="game">
+      <td>{{ game.player_1.pseudonym }}</td>
+      <td>{{ game.player_2.pseudonym }}</td>
+      {% comment %}
+      Would use OR here instead of two ifequals, 
+      but we'd need to upgrade the templating system to 1.2
+      {% endcomment %}
+      {% ifequal game.player_1.key player.key %}
+      <td>
+        {% include "partials/complete_game.html" %}
+      </td>
+      {% endifequal %}
+      {% ifequal game.player_2.key player.key %}
+      <td>
+        {% include "partials/complete_game.html" %}
+      </td>
+      {% endifequal %}
+    </tr>
+    {% endfor %}
+  </table>
   <h1>Join a game:::</h1>
   <ul>
     {% for game in available_games %}
@@ -29,17 +56,4 @@
     {% endfor %}
   </ul>
 
-  <h1>Active games::::</h1>
-  <table>
-    <tr>
-      <th>Owner</th>
-      <th>Challenger</th>
-    </tr>
-    {% for game in open_games %}
-    <tr class="game">
-      <td>{{ game.player_1.pseudonym }}</td>
-      <td>{{ game.player_2.pseudonym }}</td>
-    </tr>
-    {% endfor %}
-  </table>
 {% endblock %}

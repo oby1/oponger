@@ -12,7 +12,8 @@ from lib.request_handlers import MainPage,\
   PlayerDetails,\
   Profile,\
   JoinGame,\
-  CancelGame
+  CancelGame,\
+  CompleteGame
 
 application = webapp.WSGIApplication(
   [('/', MainPage),
@@ -24,7 +25,8 @@ application = webapp.WSGIApplication(
   ('/games', Games),
   ('/game/new', NewGame),
   ('/game/join', JoinGame),
-  ('/game/cancel', CancelGame)],
+  ('/game/cancel', CancelGame),
+  ('/game/complete', CompleteGame)],
   debug=True)
 
 def main():

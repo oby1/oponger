@@ -6,6 +6,7 @@ import os
 import sys
 import logging
 from cgi import escape
+from datetime import datetime
 
 from google.appengine.ext import webapp
 from google.appengine.api import users
@@ -15,6 +16,7 @@ from google.appengine.ext.db import GeoPt, Key
 from oponger_email import send_email
 from models import Player, Game
 from base_handler import BaseHandler
+from rules import validate_scores
 
 class MainPage(BaseHandler):
   def DoGet(self):
@@ -116,5 +118,27 @@ class CancelGame(BaseHandler):
 
     game.delete()
     logging.info("Player %s deleted game %s" % (self.player, game))
+    self.redirect('/games')
+
+class CompleteGame(BaseHandler):
+  def DoPost(self):
+    game = Game.get_by_id(long(self.request.get('game_id')))
+
+    if not (game.player_1.key() == self.player.key() or
+        game.player_2.key() == self.player.key()):
+      raise Exception("You can't complete a game you don't own, duderino!")
+
+    if game.completed_date != None:
+      raise Exception("You can't complete a game that's already been completed, duderino!")
+    
+    player_1_score = long(self.request.get('player_1_score'))
+    player_2_score = long(self.request.get('player_2_score'))
+    validate_scores(player_1_score, player_2_score)
+
+    game.completed_date = datetime.now()
+    game.player_1_score = player_1_score
+    game.player_2_score = player_2_score
+    game.put()
+    logging.info("Player %s completed game %s" % (self.player, game))
     self.redirect('/games')
 
