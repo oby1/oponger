@@ -60,12 +60,28 @@
   <table>
     <tr>
       <th>Owner</th>
+      <th>Score</th>
       <th>Challenger</th>
+      <th>Score</th>
     </tr>
     {% for game in completed_games %}
     <tr class="game">
-      <td>{{ game.player_1.pseudonym }}</td>
-      <td>{{ game.player_2.pseudonym }}</td>
+      <td 
+        {% if game.player_1_score > game.player_2_score %}
+        class="winner"
+        {% else %}
+        class="loser"
+        {% endif %}
+        >{{ game.player_1.pseudonym }}</td>
+      <td>{{ game.player_1_score }}</td>
+      <td
+        {% if game.player_2_score > game.player_1_score %}
+        class="winner"
+        {% else %}
+        class="loser"
+        {% endif %}
+        >{{ game.player_2.pseudonym }}</td>
+      <td>{{ game.player_2_score }}</td>
     </tr>
     {% endfor %}
   </table>
