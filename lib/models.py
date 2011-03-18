@@ -12,6 +12,7 @@ class Player(db.Model):
   user = db.UserProperty(required=True)
   pseudonym = db.StringProperty()
   location = db.GeoPtProperty(default=DC['geoPt'])
+
   def __str__(self):
     return "[Psuedonym: %s, Nickname: %s]" % (self.pseudonym, self.user.nickname())
 
@@ -25,6 +26,7 @@ class Game(db.Model):
   player_2 = db.ReferenceProperty(Player, collection_name='game_set_2')
   player_1_score = db.IntegerProperty()
   player_2_score = db.IntegerProperty()
+
   def __str__(self):
     return "[Player_1: %s, Player_2: %s, Created: %s]" % (self.player_1, self.player_2, self.created_date)
 
