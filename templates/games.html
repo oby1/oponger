@@ -56,4 +56,17 @@
     {% endfor %}
   </ul>
 
+  <h1>Completed games::::</h1>
+  <table>
+    <tr>
+      <th>Owner</th>
+      <th>Challenger</th>
+    </tr>
+    {% for game in completed_games %}
+    <tr class="game">
+      <td>{{ game.player_1.pseudonym }}</td>
+      <td>{{ game.player_2.pseudonym }}</td>
+    </tr>
+    {% endfor %}
+  </table>
 {% endblock %}

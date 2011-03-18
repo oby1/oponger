@@ -35,6 +35,7 @@ class Games(BaseHandler):
     additional_values = {
       'open_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
       'available_games': Game.gql("WHERE player_2 = NULL"),
+      'completed_games': Game.gql("WHERE completed_date != NULL"),
     }
 
     self.template_values.update(additional_values)
