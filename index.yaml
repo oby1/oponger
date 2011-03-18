@@ -13,9 +13,31 @@ indexes:
 - kind: Game
   properties:
   - name: completed_date
+  - name: player_1
   - name: player_2
+
+- kind: Game
+  properties:
+  - name: completed_date
+  - name: player_2
+
+- kind: Game
+  properties:
+  - name: completed_date
+  - name: player_2
+  - name: player_1
 
 - kind: Game
   properties:
   - name: player_1
   - name: completed_date
+
+- kind: Game
+  properties:
+  - name: player_1
+  - name: created_date
+
+- kind: Game
+  properties:
+  - name: player_2
+  - name: created_date

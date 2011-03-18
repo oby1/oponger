@@ -5,7 +5,7 @@
     <th>Challenger</th>
     <th>Update Scores and Complete</th>
   </tr>
-  {% for game in open_games %}
+  {% for game in active_games %}
   <tr class="game">
     <td>
       <a href="/player/{{game.player_1.key.name}}">
@@ -19,7 +19,7 @@
       </a>
     </td>
     {% comment %}
-    Would use OR here instead of two ifequals, 
+    Would use OR here instead of two ifequals,
     but we'd need to upgrade the templating system to 1.2
     {% endcomment %}
     {% ifequal game.player_1.key player.key %}

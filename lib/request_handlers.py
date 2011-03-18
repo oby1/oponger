@@ -18,14 +18,16 @@ from models import Player, Game
 from base_handler import BaseHandler
 from rules import validate_scores
 
+MAX_RECORDS = 100
+
 class MainPage(BaseHandler):
   def DoGet(self):
 
     additional_values = {
-      'open_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
+      'active_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
       'available_games': Game.gql("WHERE player_2 = NULL"),
     }
-    
+
     self.template_values.update(additional_values)
     self.render_to_response("index.html")
 
@@ -33,7 +35,7 @@ class Games(BaseHandler):
   def DoGet(self):
 
     additional_values = {
-      'open_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
+      'active_games': Game.gql("WHERE player_2 != NULL and completed_date = NULL"),
       'available_games': Game.gql("WHERE player_2 = NULL"),
       'completed_games': Game.gql("WHERE completed_date != NULL"),
     }
@@ -51,18 +53,21 @@ class PlayerDetails(BaseHandler):
       self.response.out.write("""<strong>No player with key %s.
       Try looking through the <a href="/players">list of players</a>.</strong>""" % player_key_name)
 
-    available_games = Game.gql("""WHERE player_1=:player and player_2=NULL""", player=player_to_show)
-    completed_games = Game.gql('WHERE player_1=:player and completed_date!=NULL',
-        player=player_to_show)
+    games = player_to_show.game_set_1.order("created_date").fetch(MAX_RECORDS, 0)
+    games.extend(player_to_show.game_set_2.order('created_date').fetch(MAX_RECORDS, 0))
 
-    active_games = Game.gql("""WHERE player_1=:player and player_2!=NULL\
-        and completed_date=NULL""", player=player_to_show)
+    logging.info("Player %s has games: %s" % (player_to_show, games))
+
+    # TODO: sort these
+    available_games = [game for game in games if game.player_2 == None]
+    completed_games = [game for game in games if game.completed_date != None]
+    active_games = [game for game in games if game.completed_date == None and game.player_2 != None]
 
     additional_values = {
       'player_to_show'  : player_to_show,
       'available_games' : available_games,
-      'completed_games' : completed_games, 
-      'active_games'    : active_games 
+      'completed_games' : completed_games,
+      'active_games'    : active_games
     }
 
     self.template_values.update(additional_values)
@@ -140,7 +145,7 @@ class CompleteGame(BaseHandler):
 
     if game.completed_date != None:
       raise Exception("You can't complete a game that's already been completed, duderino!")
-    
+
     player_1_score = long(self.request.get('player_1_score'))
     player_2_score = long(self.request.get('player_2_score'))
     validate_scores(player_1_score, player_2_score)

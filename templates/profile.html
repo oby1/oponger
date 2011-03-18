@@ -3,12 +3,12 @@
 {% block title %}{{ player.pseudonym }}{% endblock %}
 
 {% block content %}
-  
+
   <h1>{{ player.pseudonym }}</h1>
 
   <h1>Update your info</h1>
   <form action="/profile/update" method="post">
-    <label for="psudonym">Psudonym</label>
+    <label for="pseudonym">Psudonym</label>
     <input type="text" name="pseudonym" value="{{ player.pseudonym }}" />
     {% for location in locations %}
     <input
