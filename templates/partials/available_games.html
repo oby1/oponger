@@ -1,0 +1,19 @@
+<h1>Open games:::</h1>
+<ul>
+  {% for game in available_games %}
+  <li>
+     Owner: <a href="/player/{{game.player_1.key.name}}">{{ game.player_1.pseudonym }}</a>
+     {% ifequal player.user game.player_1.user %}
+     <form action="/game/cancel" method="post">
+       <input type="hidden" name="game_id" value="{{ game.key.id }}" />
+       <input type="submit" value="Cancel" />
+     </form>
+     {% else %}
+     <form action="/game/join" method="post">
+       <input type="hidden" name="game_id" value="{{ game.key.id }}" />
+       <input type="submit" value="Join" />
+     </form>
+     {% endifequal %}
+  </li>
+  {% endfor %}
+</ul>

@@ -49,11 +49,20 @@ class PlayerDetails(BaseHandler):
     if not self.player:
       self.error(404)
       self.response.out.write("""<strong>No player with key %s.
-      Try looking through the <a href="/players">list of players</a>.</strong>"""
-      % player_key)
+      Try looking through the <a href="/players">list of players</a>.</strong>""" % player_key)
+
+    available_games = Game.gql("""WHERE player_1=:player and player_2=NULL""", player=self.player)
+    completed_games = Game.gql('WHERE player_1=:player and completed_date!=NULL',
+        player=self.player)
+
+    active_games = Game.gql("""WHERE player_1=:player and player_2!=NULL\
+        and completed_date=NULL""", player=self.player)
 
     additional_values = {
       'player_to_show'  : player_to_show,
+      'available_games' : available_games,
+      'completed_games' : completed_games, 
+      'active_games'    : active_games 
     }
 
     self.template_values.update(additional_values)

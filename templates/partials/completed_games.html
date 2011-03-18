@@ -1,0 +1,37 @@
+<h1>Completed games::::</h1>
+<table>
+  <tr>
+    <th>Owner</th>
+    <th>Score</th>
+    <th>Challenger</th>
+    <th>Score</th>
+  </tr>
+  {% for game in completed_games %}
+  <tr class="game">
+    <td 
+      {% if game.player_1_score > game.player_2_score %}
+      class="winner"
+      {% else %}
+      class="loser"
+      {% endif %}
+      >
+      <a href="/player/{{game.player_1.key.name}}">
+        {{ game.player_1.pseudonym }}
+      </a>
+    </td>
+    <td>{{ game.player_1_score }}</td>
+    <td
+      {% if game.player_2_score > game.player_1_score %}
+      class="winner"
+      {% else %}
+      class="loser"
+      {% endif %}
+      >
+      <a href="/player/{{game.player2.key.name}}">
+        {{ game.player_2.pseudonym }}
+      </a>
+    </td>
+    <td>{{ game.player_2_score }}</td>
+  </tr>
+  {% endfor %}
+</table>
