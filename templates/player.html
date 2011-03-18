@@ -3,14 +3,14 @@
 {% block title %}{{ player_to_show.pseudonym }}{% endblock %}
 
 {% block content %}
-  
+
   <h1>{{ player_to_show.pseudonym }}</h1>
 
-  <p>{{ player_to_show.pseudonym }}</p>
-  <p>{{ player_to_show.user.nickname }}</p>
+  <p>Pseudonym: {{ player_to_show.pseudonym }}</p>
+  <p>Email: {{ player_to_show.user.nickname }}</p>
   {% for location in locations %}
     {% ifequal location.geoPt.lat player_to_show.location.lat %}
-    <p>{{location.name}}</p>
+    <p>Location: {{location.name}}</p>
     {% endifequal %}
   {% endfor %}
 

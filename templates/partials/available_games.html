@@ -1,4 +1,5 @@
 <h1>Available games:::</h1>
+{% if available_games %}
 <ul>
   {% for game in available_games %}
   <li>
@@ -17,3 +18,6 @@
   </li>
   {% endfor %}
 </ul>
+{% else %}
+No available games.
+{% endif %}
