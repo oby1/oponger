@@ -30,3 +30,12 @@ class Game(db.Model):
   def __str__(self):
     return "[Player_1: %s, Player_2: %s, Created: %s]" % (self.player_1, self.player_2, self.created_date)
 
+  def is_active(self):
+    return self.player_1 != None and self.player_2 != None and self.completed_date == None
+
+  def is_available(self):
+    return self.player_1 == None or self.player_2 == None
+
+  def is_completed(self):
+    return self.completed_date != None
+

@@ -56,12 +56,14 @@ class PlayerDetails(BaseHandler):
     games = player_to_show.game_set_1.order("created_date").fetch(MAX_RECORDS, 0)
     games.extend(player_to_show.game_set_2.order('created_date').fetch(MAX_RECORDS, 0))
 
+    games = sorted(games, key = lambda game: game.created_date, reverse=True)
+
     logging.info("Player %s has games: %s" % (player_to_show, games))
 
     # TODO: sort these
-    available_games = [game for game in games if game.player_2 == None]
-    completed_games = [game for game in games if game.completed_date != None]
-    active_games = [game for game in games if game.completed_date == None and game.player_2 != None]
+    available_games = [game for game in games if game.is_available()]
+    completed_games = [game for game in games if game.is_completed()]
+    active_games = [game for game in games if game.is_active()]
 
     additional_values = {
       'player_to_show'  : player_to_show,

@@ -4,6 +4,7 @@
   <tr>
     <th>Owner</th>
     <th>Challenger</th>
+    <th>Created</th>
     <th>Update Scores and Complete</th>
   </tr>
   {% for game in active_games %}
@@ -18,6 +19,9 @@
       <a href="/player/{{game.player_2.key.name}}">
         {{ game.player_2.pseudonym }}
       </a>
+    </td>
+    <td>
+        {{ game.created_date }}
     </td>
     {% comment %}
     Would use OR here instead of two ifequals,
