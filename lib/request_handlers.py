@@ -53,23 +53,11 @@ class PlayerDetails(BaseHandler):
       self.response.out.write("""<strong>No player with key %s.
       Try looking through the <a href="/players">list of players</a>.</strong>""" % player_key_name)
 
-    games = player_to_show.game_set_1.order("created_date").fetch(MAX_RECORDS, 0)
-    games.extend(player_to_show.game_set_2.order('created_date').fetch(MAX_RECORDS, 0))
-    games = sorted(games, key = lambda game: game.created_date, reverse=True)
-
-    logging.info("Player %s has games: %s" % (player_to_show, games))
-
-    available_games = [game for game in games if game.is_available()]
-    active_games = [game for game in games if game.is_active()]
-
-    completed_games = [game for game in games if game.is_completed()]
-    completed_games = sorted(completed_games, key = lambda game: game.completed_date, reverse=True)
-
     additional_values = {
       'player_to_show'  : player_to_show,
-      'available_games' : available_games,
-      'completed_games' : completed_games,
-      'active_games'    : active_games
+      'available_games' : player_to_show.available_games(),
+      'completed_games' : player_to_show.completed_games(),
+      'active_games'    : player_to_show.active_games()
     }
 
     self.template_values.update(additional_values)

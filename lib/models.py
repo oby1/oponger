@@ -7,6 +7,8 @@ http://code.google.com/appengine/docs/python/datastore/modelclass.html
 from google.appengine.ext import db
 from locations import DC
 
+MAX_RESULTS=1000
+
 class Player(db.Model):
   date = db.DateTimeProperty(auto_now_add=True)
   user = db.UserProperty(required=True)
@@ -16,6 +18,21 @@ class Player(db.Model):
   def __str__(self):
     return "[Psuedonym: %s, Nickname: %s]" % (self.pseudonym, self.user.nickname())
 
+  def games(self):
+    """Returns this player's games, sorted by creation date."""
+    games = self.game_set_1.order("created_date").fetch(MAX_RESULTS, 0)
+    games.extend(self.game_set_2.order('created_date').fetch(MAX_RESULTS, 0))
+    return sorted(games, key = lambda game: game.created_date, reverse=True)
+
+  def active_games(self):
+    return [game for game in self.games() if game.is_active()]
+
+  def available_games(self):
+    return [game for game in self.games() if game.is_available()]
+
+  def completed_games(self):
+    completed_games = [game for game in self.games() if game.is_completed()]
+    return sorted(completed_games, key = lambda game: game.completed_date, reverse=True)
 
 class Game(db.Model):
   created_date = db.DateTimeProperty(auto_now_add=True)
