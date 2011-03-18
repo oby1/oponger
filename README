@@ -12,13 +12,13 @@ supports:
 * Viewing all "available" games, i.e. games you can join
 * Viewing all "active" games, i.e. games people are playing, but have not been completed
 * Viewing all payers
-
-Planned features:
 * Joining a game
-* Deleting an "available" game
+* Canceling a game
 * Game result updating
 * Viewing all completed games
 * Viewing games by player
+
+Planned features:
 * Basic player stats
 * Ranking
 
