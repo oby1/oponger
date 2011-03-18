@@ -1,16 +1,6 @@
-body {
-  font-family: Verdana, Helvetica, sans-serif;
-}
-
 .logo {
   height: 200px;
   width:  200px;
-  float: left;
-}
-
-.greeting {
-  font-size: 50;
-  background-color:#ff3300;
 }
 
 h1
@@ -20,30 +10,3 @@ h1
   padding:0.2em 0.6em;
 }
 
-.player
-{
-  color:white;
-  background-color:#ff3300;
-  padding:0.2em 0.6em;
-  border-right:1px solid white;
-}
-.player:hover {background-color:#7EB6FF;}
-
-.game
-{
-  text-decoration:none;
-  color:white;
-  background-color:#0033FF;
-  padding:0.2em 0.6em;
-  border-right:1px solid white;
-}
-.game:hover {background-color:#7EB6FF;}
-
-.winner
-{
-  background-color:#4B8A08;
-}
-.loser
-{
-  background-color:#8A0808;
-}
