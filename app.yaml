@@ -17,3 +17,6 @@ handlers:
   script: main.py
   login: required
 
+builtins:
+- remote_api: on
+
