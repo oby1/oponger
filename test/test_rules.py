@@ -22,6 +22,10 @@ class TestRules(unittest.TestCase):
       self.assertRaises(Exception, rules.validate_score_diff, 21, 22)
       self.assertRaises(Exception, rules.validate_score_diff, 20, 21)
 
+      # should pass validation
+      rules.validate_score_diff(21, 0)
+      rules.validate_score_diff(21, 19)
+
     def test_validate_not_huge(self):
       # should raise an exception if the score is way high
       self.assertRaises(Exception, rules.validate_not_huge, 1000)
