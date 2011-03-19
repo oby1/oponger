@@ -3,7 +3,7 @@ import logging
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-from lib.request_handlers import MainPage,\
+from lib.page_handlers import MainPage,\
   UpdateProfile,\
   NewGame,\
   Rulez,\
