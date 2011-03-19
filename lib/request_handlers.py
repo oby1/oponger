@@ -2,19 +2,13 @@
 All of the RequestHandlers live here. These are akin to traditional Controllers
 or Django "views".
 """
-import os
-import sys
 import logging
 from cgi import escape
 from datetime import datetime
 
-from google.appengine.ext import webapp
-from google.appengine.api import users
-from google.appengine.ext import db
-from google.appengine.ext.db import GeoPt, Key
-from lib.elo import update_scores, update_scores
+from google.appengine.ext.db import GeoPt
+from elo import update_scores
 
-from oponger_email import send_email
 from models import Player, Game
 from base_handler import BaseHandler
 from rules import validate_scores
