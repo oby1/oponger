@@ -10,15 +10,14 @@
   <div class="greeting">Hi {{ user.nickname }}. Looks like you haven't set up your pseudonym. Head to the <a href="/profile">profile</a> page to get set up!</div>
   {% endif %}
 
-  <p>OPing, OPong, baby. Get your paddle ready and your game on, because
-  OPOWER's ping pong torunament is back!</p>
+  <p>OPing, OPong, baby. Get your paddle ready, because OPOWER's ping pong torunament is back!</p>
 
   {% include "partials/new_game.html" %}
-  <h1>Top players:</h1>
+  <h1>Leader Board</h1>
   <p>Visit <a href="/players">all players</a>.</p>
   {% include "partials/players_table.html" %}
 
-  <h1>Recent games:</h1>
+  <h1>Recent Games</h1>
   <p>Visit <a href="/games">all games</a>.</p>
   {% include "partials/completed_games.html" %}
 {% endblock %}
