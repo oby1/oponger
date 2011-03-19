@@ -14,6 +14,11 @@ indexes:
   properties:
   - name: completed_date
   - name: created_date
+
+- kind: Game
+  properties:
+  - name: completed_date
+  - name: created_date
     direction: desc
 
 - kind: Game

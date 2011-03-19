@@ -77,5 +77,5 @@ class Game(db.Model):
 
   @staticmethod
   def all_completed():
-    return Game.gql("WHERE completed_date != NULL ORDER BY completed_date, created_date DESC")
+    return Game.gql("WHERE completed_date != NULL ORDER BY completed_date DESC")
 
