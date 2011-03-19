@@ -3,12 +3,7 @@
 {% block title %}OPONGER ::: GAMES{% endblock %}
 
 {% block content %}
-
-  <h1>New Game::::</h1>
-  <form action="/game/new" method="post">
-    <input type="submit" value="New Game" />
-  </form>
-
+  {% include "partials/new_game.html" %}
   {% include "partials/active_games.html" %}
   {% include "partials/available_games.html" %}
   {% include "partials/completed_games.html" %}
