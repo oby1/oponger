@@ -28,7 +28,8 @@ class MainPage(BaseHandler):
     additional_values = {
       'active_games': Game.gql("WHERE player_2 != NULL AND completed_date = NULL"),
       'available_games': Game.gql("WHERE player_2 = NULL"),
-      'players' : Player.all_by_rank().fetch(5,0) # just the top players
+      'players' : Player.all_by_rank().fetch(5,0), # just the top players
+      'completed_games' : Game.all_completed().fetch(5,0) # just a few recently completed games
     }
 
     self.template_values.update(additional_values)
