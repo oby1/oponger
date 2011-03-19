@@ -1,0 +1,20 @@
+<table>
+    <tr>
+        <th>Rank</th>
+        <th>Pseudonym</th>
+        <th>Email</th>
+        <th>Location</th>
+    </tr>
+    {% for player in players %}
+    <tr class="player">
+        <td>{{ player.rank }}</td>
+        <td><a href="/player/{{player.key.name}}">{{ player.pseudonym }}</a></td>
+        <td>{{ player.user.nickname }}</td>
+        {% for location in locations %}
+        {% ifequal location.geoPt.lat player.location.lat %}
+        <td>{{ location.name }}</td>
+        {% endifequal %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
