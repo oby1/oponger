@@ -1,0 +1,27 @@
+<html>
+
+  {% comment %}
+  This is our base admin template. For details on template inheritence, see
+  http://docs.djangoproject.com/en/dev/topics/templates/#template-inheritance
+  {% endcomment %}
+  <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+    <title>{% block title %}Admin :: OPONGER{% endblock %}</title>
+    <script src="/js/main.js"></script>
+  </head>
+
+  <body>
+    <img class="logo" src="/images/oponger_logo_large.jpg" />
+
+    <ul id="list-nav">
+      <li><a href="/">OPONGER Home</a></li>
+      <li><a href="/rulez">Admin Home</a></li>
+      <li><a href="/games">Update Schema</a></li>
+      <li><a href="{{logout_url}}">Logout</a></li>
+    </ul>
+
+    {% block content %}{% endblock %}
+
+  </body>
+
+</html>

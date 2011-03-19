@@ -6,10 +6,13 @@ import logging
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-from lib.admin_handlers import UpdateSchema
+
+from lib.admin_handlers import MainPage, UpdateSchema
+
 
 application = webapp.WSGIApplication(
-  [('/admin/update_schema', UpdateSchema)],
+  [('/admin', MainPage),
+   ('/admin/update_schema', UpdateSchema)],
   debug=True)
 
 def main():
