@@ -56,6 +56,11 @@ class Game(db.Model):
   def is_completed(self):
     return self.completed_date != None
 
+  def winner(self):
+    if self.completed_date == None:
+      raise Exception("Can't have a winner for a game which hasn't been completed")
+    return self.player_1 if self.player_1_score > self.player_2_score else self.player_2
+
   @staticmethod
   def all_active():
     return Game.gql("WHERE player_2 != NULL AND completed_date = NULL ORDER BY player_2, created_date DESC")

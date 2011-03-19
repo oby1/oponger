@@ -17,6 +17,7 @@ from oponger_email import send_email
 from models import Player, Game
 from base_handler import BaseHandler
 from rules import validate_scores
+from stats import stats
 
 MAX_RECORDS = 100
 
@@ -57,7 +58,8 @@ class PlayerDetails(BaseHandler):
       'player_to_show'  : player_to_show,
       'available_games' : player_to_show.available_games(),
       'completed_games' : player_to_show.completed_games(),
-      'active_games'    : player_to_show.active_games()
+      'active_games'    : player_to_show.active_games(),
+      'stats'           : stats(player_to_show)
     }
 
     self.template_values.update(additional_values)

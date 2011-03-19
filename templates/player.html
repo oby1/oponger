@@ -14,6 +14,9 @@
     {% endifequal %}
   {% endfor %}
 
+  <p><strong>Wins:</strong>{{ stats.wins }}</p>
+  <p><strong>Losses:</strong>{{ stats.losses }}</p>
+
   {% include "partials/active_games.html" %}
   {% include "partials/available_games.html" %}
   {% include "partials/completed_games.html" %}
