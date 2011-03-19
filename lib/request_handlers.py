@@ -74,7 +74,7 @@ class Players(BaseHandler):
   def DoGet(self):
 
     additional_values = {
-      'players'   : Player.all(),
+      'players'   : Player.all_by_rank(),
     }
 
     self.template_values.update(additional_values)

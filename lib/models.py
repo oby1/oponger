@@ -36,6 +36,10 @@ class Player(db.Model):
     completed_games = [game for game in self.games() if game.is_completed()]
     return sorted(completed_games, key = lambda game: game.completed_date, reverse=True)
 
+  @staticmethod
+  def all_by_rank():
+    return Player.gql("ORDER BY rank DESC")
+
 class Game(db.Model):
   created_date = db.DateTimeProperty(auto_now_add=True)
   completed_date = db.DateTimeProperty()
