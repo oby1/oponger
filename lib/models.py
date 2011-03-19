@@ -6,6 +6,7 @@ http://code.google.com/appengine/docs/python/datastore/modelclass.html
 """
 from google.appengine.ext import db
 from locations import DC
+from elo import INITIAL_RANK
 
 MAX_RESULTS=1000
 
@@ -14,6 +15,7 @@ class Player(db.Model):
   user = db.UserProperty(required=True)
   pseudonym = db.StringProperty()
   location = db.GeoPtProperty(default=DC['geoPt'])
+  rank = db.IntegerProperty(default=INITIAL_RANK)
 
   def __str__(self):
     return "[Psuedonym: %s, Nickname: %s]" % (self.pseudonym, self.user.nickname())

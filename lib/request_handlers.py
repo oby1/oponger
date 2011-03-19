@@ -12,6 +12,7 @@ from google.appengine.ext import webapp
 from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.ext.db import GeoPt, Key
+from lib.elo import update_scores, update_scores
 
 from oponger_email import send_email
 from models import Player, Game
@@ -145,7 +146,11 @@ class CompleteGame(BaseHandler):
     game.completed_date = datetime.now()
     game.player_1_score = player_1_score
     game.player_2_score = player_2_score
+    update_scores(game)
+    game.player_1.put()
+    game.player_2.put()
     game.put()
+
     logging.info("Player %s completed game %s" % (self.player, game))
     self.redirect('/games')
 

@@ -6,16 +6,18 @@
 
   <h1>{{ player_to_show.pseudonym }}</h1>
 
-  <p>Pseudonym: {{ player_to_show.pseudonym }}</p>
-  <p>Email: {{ player_to_show.user.nickname }}</p>
+  <p><strong>Pseudonym:</strong> {{ player_to_show.pseudonym }}</p>
+  <p><strong>Email:</strong> {{ player_to_show.user.nickname }}</p>
   {% for location in locations %}
     {% ifequal location.geoPt.lat player_to_show.location.lat %}
-    <p>Location: {{location.name}}</p>
+    <p><strong>Location:</strong> {{location.name}}</p>
     {% endifequal %}
   {% endfor %}
 
-  <p><strong>Wins:</strong>{{ stats.wins }}</p>
-  <p><strong>Losses:</strong>{{ stats.losses }}</p>
+  <p><strong>Rank:</strong> {{ player_to_show.rank }}</p>
+  <p><strong>Percent Win:</strong> {{ stats.percent_win }}</p>
+  <p><strong>Wins:</strong> {{ stats.wins }}</p>
+  <p><strong>Losses:</strong> {{ stats.losses }}</p>
 
   {% include "partials/active_games.html" %}
   {% include "partials/available_games.html" %}
