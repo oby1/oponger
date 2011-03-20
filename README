@@ -19,14 +19,17 @@ supports:
 * Viewing games by player
 * Basic player stats
 * Ranking
+* Admin site with a couple of features
 
 Planned features:
 * Usable interface
+
 
 Live app URLs
 -------------
 http://oponger.opower.com
 http://oponger.appspot.com
+
 
 Implementation
 --------------
@@ -45,6 +48,7 @@ This will set the github repo as the "origin". To push your local changes from t
 To push the app to Google App Engine:
     appcfg.py update /path/to/oponger
 
+
 Running The App Locally
 -----------------------
 To run the app, you'll need to download and install Google App Engine Python SDK from:
@@ -55,6 +59,7 @@ Once you've installed it, you can run it from the command line, using:
 
 Or, you can fire it up using the handy dandy GoogleAppEngineLauncher, which provides handy links to the
 dashboard, logs, and more.
+
 
 Working With IntelliJ
 ---------------------
@@ -69,6 +74,7 @@ you can work with the project through IntelliJ.
 ** Under "Please select the desired technologies", Select Google App Engine
 ** If asked for the Google App Engine SDK, under OSX that should be in
     /Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine
+
 
 Testing
 -------
