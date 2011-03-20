@@ -26,6 +26,7 @@
     {% if game.player_1.key == player.key or game.player_2.key == player.key %}
     <td>
       {% include "partials/complete_game.html" %}
+      {% include "partials/cancel_game.html" %}
     </td>
     {% endif %}
   </tr>
