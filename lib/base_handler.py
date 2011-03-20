@@ -30,19 +30,24 @@ class BaseHandler(webapp.RequestHandler):
     self.player = Player.get_or_insert(self.user.user_id(), user = self.user)
     self.template_values = {
           'user'       : self.user,
-          'player'     : self.player, 
+          'player'     : self.player,
           'logout_url' : create_logout_url('/'),
           'locations'  : LOCATIONS
         }
     logging.debug("Setting up template values %s" % (self.template_values))
 
+  def setup(self):
+    self.template_values['is_admin'] = self.request._environ['USER_IS_ADMIN']
+
   def get(self, *args):
-    # call the derived class' 'DoGet' method that actually has 
+    self.setup()
+    # call the derived class' 'DoGet' method that actually has
     # the logic inside it
     self.DoGet(*args)
 
   def post(self, *args):
-    # call the derived class' 'DoPost' method 
+    self.setup()
+    # call the derived class' 'DoPost' method
     logging.debug("POST request body: %s" % self.request.body)
     self.DoPost(*args)
 

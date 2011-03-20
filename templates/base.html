@@ -20,6 +20,9 @@
       <li><a href="/players">Players</a></li>
       <li><a href="/profile">Profile</a></li>
       <li><a href="{{logout_url}}">Logout</a></li>
+      {% if is_admin %}
+      <li><a href="/admin/">Admin</a></li>
+      {% endif %}
     </ul>
 
     {% block content %}{% endblock %}

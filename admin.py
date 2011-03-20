@@ -11,7 +11,7 @@ from lib.admin_handlers import MainPage, UpdateSchema
 
 
 application = webapp.WSGIApplication(
-  [('/admin', MainPage),
+  [('/admin/', MainPage),
    ('/admin/update_schema', UpdateSchema)],
   debug=True)
 
