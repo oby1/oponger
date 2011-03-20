@@ -23,20 +23,11 @@
     <td>
         {{ game.created_date }}
     </td>
-    {% comment %}
-    Would use OR here instead of two ifequals,
-    but we'd need to upgrade the templating system to 1.2
-    {% endcomment %}
-    {% ifequal game.player_1.key player.key %}
+    {% if game.player_1.key == player.key or game.player_2.key == player.key %}
     <td>
       {% include "partials/complete_game.html" %}
     </td>
-    {% endifequal %}
-    {% ifequal game.player_2.key player.key %}
-    <td>
-      {% include "partials/complete_game.html" %}
-    </td>
-    {% endifequal %}
+    {% endif %}
   </tr>
   {% endfor %}
 </table>
