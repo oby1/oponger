@@ -55,8 +55,10 @@ class BaseHandler(webapp.RequestHandler):
     self.DoPost(*args)
 
   def render_to_response(self, template_name):
-    """Opens the given template and renders the values to the response,
-    along with the resulting template_values."""
+    """
+    Opens the given template and renders the values to the response,
+    along with the resulting template_values.
+    """
     path = os.path.join(PATH_TO_TEMPLATES, template_name)
     logging.debug("Rendering template_values %s to template %s." % (self.template_values, template_name))
     self.response.out.write(template.render(path, self.template_values))
