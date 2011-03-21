@@ -27,7 +27,7 @@ class BaseHandler(webapp.RequestHandler):
   def __init__(self):
     self.user = users.get_current_user()
     # Creates a player if one does not already exist. No signup!
-    self.player = Player.get_or_insert(self.user.user_id(), user = self.user)
+    self.player = Player.get_or_insert(self.user.user_id(), user = self.user, pseudonym = self.user.nickname())
     self.template_values = {
           'user'       : self.user,
           'player'     : self.player,
@@ -37,7 +37,10 @@ class BaseHandler(webapp.RequestHandler):
     logging.debug("Setting up template values %s" % (self.template_values))
 
   def setup(self):
-    self.template_values['is_admin'] = self.request._environ['USER_IS_ADMIN']
+    try:
+      self.template_values['is_admin'] = self.request._environ['USER_IS_ADMIN']
+    except:
+      self.template_values['is_admin'] = False
 
   def get(self, *args):
     self.setup()
