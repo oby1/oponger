@@ -25,13 +25,6 @@
     {% endfor %}
     <input type="submit" class="s" value="Update" />
   </form>
-  <p>{{ player.pseudonym }}</p>
-  <p>{{ player.user.nickname }}</p>
-  {% for location in locations %}
-    {% ifequal location.geoPt.lat player.location.lat %}
-    <p>{{location.name}}</p>
-    {% endifequal %}
-  {% endfor %}
 
 {% endblock %}
 
