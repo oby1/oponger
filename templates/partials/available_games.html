@@ -3,8 +3,8 @@
 <ul>
   {% for game in available_games %}
   <li>
-     <strong>Creator:</strong> <a href="/player/{{game.player_1.key.name}}">{{ game.player_1.pseudonym }}</a>
-     <strong>Created:</strong> {{ game.created_date }}
+     <a href="/player/{{game.player_1.key.name}}">{{ game.player_1.pseudonym }}</a>
+     {{ game.created_date|timesince }} ago <small>({{ game.created_date|date:"D, d M Y" }})</small>
      {% ifequal player.user game.player_1.user %}
      {% include "partials/cancel_game.html" %}
      {% else %}
