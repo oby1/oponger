@@ -26,7 +26,7 @@ class BaseHandler(webapp.RequestHandler):
   """
   def __init__(self):
     self.user = users.get_current_user()
-    # Creates a player if one does not already exist. No signup!
+    # Creates a player if one does not already exist. No signup required!
     self.player = Player.get_or_insert(self.user.user_id(), user = self.user, pseudonym = self.user.nickname())
     self.template_values = {
           'user'       : self.user,
