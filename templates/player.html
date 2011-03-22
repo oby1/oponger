@@ -4,7 +4,7 @@
 
 {% block content %}
 
-  <h1>{{ player_to_show.pseudonym }}</h1>
+  <h2>{{ player_to_show.pseudonym }}</h2>
 
   <p><strong>Pseudonym:</strong> {{ player_to_show.pseudonym }}</p>
   <p><strong>Email:</strong> {{ player_to_show.user.nickname }}</p>
@@ -21,7 +21,7 @@
 
   {% include "partials/active_games.html" %}
   {% include "partials/available_games.html" %}
-  <h1>Completed Games</h1>
+  <h2>Completed Games</h2>
   {% include "partials/completed_games.html" %}
 {% endblock %}
 

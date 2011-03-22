@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}OPONGER ::: HOME{% endblock %}
+{% block title %}HOME{% endblock %}
 
 {% block content %}
+
+<h2>Game on!</h2>
 
   {% if player.pseudonym %}
   <div class="greeting">Hi {{ player.pseudonym }}.</div>
@@ -13,11 +15,11 @@
   <p>OPing, OPong, baby. Get your paddle ready, because OPOWER's ping pong torunament is back!</p>
 
   {% include "partials/new_game.html" %}
-  <h1>Leader Board</h1>
+  <h3>Leader Board</h3>
   <p>Visit <a href="/players">all players</a>.</p>
   {% include "partials/players_table.html" %}
 
-  <h1>Recent Games</h1>
+  <h3>Recent Games</h3>
   <p>Visit <a href="/games">all games</a>.</p>
   {% include "partials/completed_games.html" %}
 {% endblock %}

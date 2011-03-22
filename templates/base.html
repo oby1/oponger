@@ -1,32 +1,46 @@
 <html>
 
-  {% comment %}
-  This is our base template. For details on template inheritence, see
-  http://docs.djangoproject.com/en/dev/topics/templates/#template-inheritance
-  {% endcomment %}
-  <head>
-    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
-    <title>{% block title %}OPONGER{% endblock %}</title>
-    <script src="/js/main.js"></script>
-  </head>
+{% comment %}
+This is our base template. For details on template inheritence, see
+http://docs.djangoproject.com/en/dev/topics/templates/#template-inheritance
+{% endcomment %}
+<head>
+<link rel="stylesheet" href="/stylesheets/fonts/molot/font.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/stylesheets/fonts/chunkfive/font.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link type="text/css" rel="stylesheet" href="/stylesheets/grid.css" />
+<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+<title>OPONGER :: {% block title %}{% endblock %}</title>
+<script src="/js/main.js"></script>
+</head>
 
-  <body>
-    <img class="logo" src="/images/oponger_logo_large.jpg" />
-
-    <ul id="list-nav">
-      <li><a href="/">Home</a></li>
-      <li><a href="/rulez">Rulez</a></li>
-      <li><a href="/games">Games</a></li>
-      <li><a href="/players">Players</a></li>
-      <li><a href="/profile">Profile</a></li>
-      <li><a href="{{logout_url}}">Logout</a></li>
-      {% if is_admin %}
-      <li><a href="/admin/">Admin</a></li>
-      {% endif %}
+<body>
+<div class="wrapper">
+    
+    <ul class="meta-nav">
+        <li><a href="{{logout_url}}">Logout</a></li>
+        {% if is_admin %}
+        <li><a href="/admin/">Admin</a></li>
+        {% endif %}
     </ul>
+    <div id="container" class="container_12 rounded clearfix">
+        <div id="main" class="grid_8 prefix_4">
+            
+            <ul class="navigation" class="clearfix">
+                <li><a href="/">Home</a></li>
+                <li><a href="/rulez">Rulez</a></li>
+                <li><a href="/games">Games</a></li>
+                <li><a href="/players">Players</a></li>
+                <li><a href="/profile">Profile</a></li>
+            </ul>
+            
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
 
-    {% block content %}{% endblock %}
+    </div>
 
-  </body>
+</div>
+</body>
 
 </html>

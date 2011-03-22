@@ -1,4 +1,4 @@
-<h1>Available Games</h1>
+<h2>Available Games</h2>
 {% if available_games %}
 <ul>
   {% for game in available_games %}
@@ -10,7 +10,7 @@
      {% else %}
      <form action="/game/join" method="post">
        <input type="hidden" name="game_id" value="{{ game.key.id }}" />
-       <input type="submit" value="Join" />
+       <input type="submit" class="s" value="Join" />
      </form>
      {% endifequal %}
   </li>

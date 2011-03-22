@@ -1,15 +1,156 @@
-.logo {
-  height: 200px;
-  width:  200px;
+/* OPONGER MAIN CSS */
+
+/* HTML Elements*/
+
+body {
+    background: #313131 fixed url(/images/background.jpg) 0 0;
+    color: #fff;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
 }
 
-h1
-{
-  color:white;
-  background-color:purple;
-  padding:0.2em 0.6em;
+a {
+    color: #ffc000;
+    text-decoration: none;
 }
 
-#list-nav {
+a:hover, 
+ul.meta-nav a:hover,
+ul.navigation a:hover {
+    color: #ff00fc;
+}
+
+h1,h2,h3,h4,h5,h6, ul, ol {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+	font-family: 'MolotRegular';
+	font-size: 120px;
+	line-height: 120px;
+    text-transform: uppercase;
+}
+
+h2, h3, h4, h5 {
+	font-family: 'ChunkFiveRegular';
+    text-transform: uppercase;    
+}
+
+h2 {
+    color: #fff;
+    font-size: 40px;
+    line-height: 44px;
+    margin: 40px 0 20px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 20px;
+}
+
+/* Global Styles */
+
+.rounded {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+
+/* Blocks */
+
+.wrapper {
+    background: transparent url(/images/logo.png) no-repeat top center;
+    margin-top: 20px;
+}
+
+#container {
+    padding: 20px;
+    position: relative;
+}
+
+#main {
+}
+
+#content {
+    clear: both;
+    padding-top: 30px;
+}
+
+/* BLOCK: Navigation */
+
+ul.navigation, ul.meta-nav {
     list-style-type: none;
+    z-index: 3;
+}
+
+ul.navigation li, ul.meta-nav li {
+    float: left;
+    margin-right: 20px;
+}
+
+ul.navigation {
+    margin: 100px 0 0 0;
+    /* Rotate */
+    -webkit-transform: rotate(-3deg); 
+    -moz-transform: rotate(-3deg);	
+}
+
+ul.navigation li a {
+    border-bottom: 2px solid transparent;
+    color: #c8c8c8;
+    display: block;
+	font-family: 'ChunkFiveRegular';
+	font-size: 24px;
+	line-height: 23px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+ul.navigation li a:hover {
+    color: #ffffff;
+    border-bottom: 2px solid #fff;
+}
+
+ul.meta-nav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    -webkit-transform: rotate(5deg); 
+    -moz-transform: rotate(5deg);	
+}
+
+ul.meta-nav a {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+/* Form Elements */
+input.t {
+    border: none;
+    font-size: 14px;
+    padding: 10px;
+    
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+input.s {
+    background: #ffc000;
+    border: none;
+    font-size: 14px;
+	font-family: 'ChunkFiveRegular';
+    padding: 11px 10px 9px;
+    text-transform: uppercase;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+input.s:hover {
+    background: #ff7200;
+    cursor: hand;
 }
