@@ -9,6 +9,7 @@
      {% include "partials/cancel_game.html" %}
      {% else %}
      <form action="/game/join" method="post">
+       <input type="hidden" name="redirect_path" value="{{redirect_path}}" />
        <input type="hidden" name="game_id" value="{{ game.key.id }}" />
        <input type="submit" class="s" value="Join" />
      </form>
