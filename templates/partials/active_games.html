@@ -1,37 +1,28 @@
 <h2>Active Games</h2>
 {% if active_games %}
-<table>
-  <tr>
-    <th>Creator</th>
-    <th>Challenger</th>
-    <th>Created</th>
-    <th>Update Scores and Complete</th>
-  </tr>
+<ul>
   {% for game in active_games %}
-  <tr class="game">
-    <td>
+  <li class="game">
+
       <a href="/player/{{game.player_1.key.name}}">
         {{ game.player_1.pseudonym }}
       </a>
-    </td>
 
-    <td>
+      VS.
+
       <a href="/player/{{game.player_2.key.name}}">
         {{ game.player_2.pseudonym }}
       </a>
-    </td>
-    <td>
-        {{ game.created_date }}
-    </td>
+
+    {{ game.created_date|timesince }} ago <small>({{ game.created_date|date:"D, d M Y" }})</small>
+
     {% if game.player_1.key == player.key or game.player_2.key == player.key %}
-    <td>
       {% include "partials/complete_game.html" %}
       {% include "partials/cancel_game.html" %}
-    </td>
     {% endif %}
-  </tr>
+  </li>
   {% endfor %}
-</table>
+</ul>
 {% else %}
 No active games.
 {% endif %}
