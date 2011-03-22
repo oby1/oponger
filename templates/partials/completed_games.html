@@ -1,10 +1,10 @@
 {% if completed_games %}
 <table>
   <tr>
-    <th>Owner</th>
-    <th>Score</th>
-    <th>Challenger</th>
-    <th>Score</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
     <th>Completed</th>
   </tr>
   {% for game in completed_games %}
@@ -33,7 +33,7 @@
       </a>
     </td>
     <td>{{ game.player_2_score }}</td>
-    <td>{{ game.completed_date }}</td>
+    <td> {{ game.completed_date|timesince }} ago <small>({{ game.completed_date|date:"D, d M Y" }})</small></td>
   </tr>
   {% endfor %}
 </table>
