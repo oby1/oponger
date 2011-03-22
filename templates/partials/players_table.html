@@ -1,5 +1,6 @@
 <table>
     <tr>
+        <th></th>
         <th>Rank</th>
         <th>Pseudonym</th>
         <th>Email</th>
@@ -7,6 +8,7 @@
     </tr>
     {% for player in players %}
     <tr class="player">
+        <td>{% gravatar_img_for_email player.user.nickname %}</td>
         <td>{{ player.rank }}</td>
         <td><a href="/player/{{player.key.name}}">{{ player.pseudonym }}</a></td>
         <td>{{ player.user.nickname }}</td>

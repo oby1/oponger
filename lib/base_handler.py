@@ -15,8 +15,11 @@ from google.appengine.api.users import create_logout_url
 from models import Player
 from locations import LOCATIONS
 
+
 """Templates live in this path-relative directory."""
 PATH_TO_TEMPLATES = os.path.join(os.path.dirname(__file__),"../templates")
+
+register = template.register_template_library('templatetags.gravatar')
 
 class BaseHandler(webapp.RequestHandler):
   """
