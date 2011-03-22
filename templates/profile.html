@@ -8,6 +8,7 @@
 
   <h2>Update your info</h2>
   <form action="/profile/update" method="post">
+    <input type="hidden" name="redirect_path" value="{{redirect_path}}" />
     <label for="pseudonym">Psudonym</label>
     <input type="text" name="pseudonym" class="t" value="{{ player.pseudonym }}" />
     {% for location in locations %}

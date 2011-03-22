@@ -29,14 +29,17 @@ class BaseHandler(webapp.RequestHandler):
     # Creates a player if one does not already exist. No signup required!
     self.player = Player.get_or_insert(self.user.user_id(), user = self.user, pseudonym = self.user.nickname())
     self.template_values = {
-          'user'       : self.user,
-          'player'     : self.player,
-          'logout_url' : create_logout_url('/'),
-          'locations'  : LOCATIONS
+          'user'          : self.user,
+          'player'        : self.player,
+          'logout_url'    : create_logout_url('/'),
+          'locations'     : LOCATIONS,
         }
     logging.debug("Setting up template values %s" % (self.template_values))
 
   def setup(self):
+    # Used for all forms on a page, to specify where to redirect back after form submission
+    # see redirect_to_redirect_path_or_home
+    self.template_values['redirect_path'] = self.request.path
     try:
       self.template_values['is_admin'] = self.request._environ['USER_IS_ADMIN']
     except:
@@ -53,6 +56,10 @@ class BaseHandler(webapp.RequestHandler):
     # call the derived class' 'DoPost' method
     logging.debug("POST request body: %s" % self.request.body)
     self.DoPost(*args)
+
+  def redirect_to_redirect_path_or_home(self):
+    redirect_path = self.request.get('redirect_path')
+    self.redirect(redirect_path if redirect_path else '/')
 
   def render_to_response(self, template_name):
     """

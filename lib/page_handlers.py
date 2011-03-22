@@ -94,7 +94,7 @@ class NewGame(BaseHandler):
     game = Game(player_1 = self.player)
     game.put()
     logging.info("Creating new game %s" % (game))
-    self.redirect('/games')
+    self.redirect_to_redirect_path_or_home()
 
 class JoinGame(BaseHandler):
   def DoPost(self):
@@ -108,7 +108,7 @@ class JoinGame(BaseHandler):
     game.player_2 = self.player
     game.put()
     logging.info("Player %s joined game %s" % (self.player, game))
-    self.redirect('/games')
+    self.redirect_to_redirect_path_or_home()
 
 class CancelGame(BaseHandler):
   def DoPost(self):
@@ -122,7 +122,7 @@ class CancelGame(BaseHandler):
 
     game.delete()
     logging.info("Player %s deleted game %s" % (self.player, game))
-    self.redirect('/games')
+    self.redirect_to_redirect_path_or_home()
 
 class CompleteGame(BaseHandler):
   def DoPost(self):
@@ -148,5 +148,5 @@ class CompleteGame(BaseHandler):
     game.put()
 
     logging.info("Player %s completed game %s" % (self.player, game))
-    self.redirect('/games')
+    self.redirect_to_redirect_path_or_home()
 
