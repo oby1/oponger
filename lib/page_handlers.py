@@ -114,7 +114,7 @@ class CancelGame(BaseHandler):
   def DoPost(self):
     game = Game.get_by_id(long(self.request.get('game_id')))
 
-    if game.player_1.key() != self.player.key():
+    if not (game.player_1.key() == self.player.key() or game.player_2.key() == self.player.key()):
       raise Exception("You can't delete a game you don't own, duderino!")
 
     if game.completed_date != None:
