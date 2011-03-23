@@ -83,7 +83,11 @@ class Rulez(BaseHandler):
 class UpdateProfile(BaseHandler):
   def DoPost(self):
     logging.info("Updating player info")
-    self.player.pseudonym = escape(self.request.get('pseudonym'))
+    pseudonym = escape(self.request.get('pseudonym'))
+    if pseudonym != self.player.pseudonym and len(pseudonym) > 15:
+      raise Exception("If you update a pseudonym, it must be no more thn 15 characters long.")
+
+    self.player.pseudonym = pseudonym
     (lat, lon) = self.request.get('location').split(',')
     self.player.location = GeoPt(lat, lon)
     self.player.put()
@@ -114,7 +118,7 @@ class CancelGame(BaseHandler):
   def DoPost(self):
     game = Game.get_by_id(long(self.request.get('game_id')))
 
-    if game.player_1.key() != self.player.key():
+    if not (game.player_1.key() == self.player.key() or game.player_2.key() == self.player.key()):
       raise Exception("You can't delete a game you don't own, duderino!")
 
     if game.completed_date != None:
