@@ -15,7 +15,7 @@ class Player(db.Model):
   user = db.UserProperty(required=True)
   pseudonym = db.StringProperty()
   location = db.GeoPtProperty(default=DC['geoPt'])
-  rank = db.IntegerProperty(default=INITIAL_RANK)
+  rank = db.FloatProperty(default=INITIAL_RANK)
 
   def __str__(self):
     return "[Psuedonym: %s, Nickname: %s]" % (self.pseudonym, self.user.nickname())

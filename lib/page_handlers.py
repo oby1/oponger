@@ -7,7 +7,7 @@ from cgi import escape
 from datetime import datetime
 
 from google.appengine.ext.db import GeoPt
-from elo import update_scores
+from elo import update_ranks
 
 from models import Player, Game
 from base_handler import BaseHandler
@@ -142,7 +142,9 @@ class CompleteGame(BaseHandler):
     game.completed_date = datetime.now()
     game.player_1_score = player_1_score
     game.player_2_score = player_2_score
-    update_scores(game)
+
+    update_ranks(game)
+
     game.player_1.put()
     game.player_2.put()
     game.put()
