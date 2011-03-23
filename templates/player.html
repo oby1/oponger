@@ -6,22 +6,40 @@
 
   <h2>{{ player_to_show.pseudonym }}</h2>
 
-  <p><strong>Pseudonym:</strong> {{ player_to_show.pseudonym }}</p>
-  <p><strong>Email:</strong> {{ player_to_show.user.nickname }}</p>
-  {% for location in locations %}
-    {% ifequal location.geoPt.lat player_to_show.location.lat %}
-    <p><strong>Location:</strong> {{location.name}}</p>
-    {% endifequal %}
-  {% endfor %}
+  <table width="100%">
+    <tr>
+        <td width="30%"><strong>Pseudonym</strong></td>
+        <td width="70%">{{ player_to_show.pseudonym }}</td>
+    </tr>
+    <tr>
+        <td><strong>Email</strong></td>
+        <td>{{ player_to_show.user.nickname }}</td>
+    </tr>
 
-  <p><strong>Rank:</strong> {{ player_to_show.rank }}</p>
-  <p><strong>Percent Win:</strong> {{ stats.percent_win }}</p>
-  <p><strong>Wins:</strong> {{ stats.wins }}</p>
-  <p><strong>Losses:</strong> {{ stats.losses }}</p>
+      {% for location in locations %}
+        {% ifequal location.geoPt.lat player_to_show.location.lat %}
+    <tr>
+        <td><strong>Location</strong></td>
+        <td>{{location.name}}</td>
+    </tr>
+        {% endifequal %}
+      {% endfor %}
+    <tr>
+        <td><strong>Rank</strong></td>
+        <td>{{ player_to_show.rank }}</td>
+    </tr>
+    <tr>
+        <td><strong>Percent Win</strong></td>
+        <td>{{ stats.percent_win }}</td>
+    </tr>
+    <tr>
+        <td><strong>Wins/Losses</strong></td>
+        <td>{{ stats.wins }} / {{ stats.losses }}</td>
+    </tr>                 
+  </table>
 
   {% include "partials/active_games.html" %}
   {% include "partials/available_games.html" %}
-  <h2>Completed Games</h2>
   {% include "partials/completed_games.html" %}
 {% endblock %}
 

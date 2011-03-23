@@ -7,16 +7,17 @@
 <h2>Game on!</h2>
 
   {% if player.pseudonym %}
-  <div class="greeting">Hi {{ player.pseudonym }}.</div>
   {% else %}
-  <div class="greeting">Hi {{ user.nickname }}. Looks like you haven't set up your pseudonym. Head to the <a href="/profile">profile</a> page to get set up!</div>
+  <p class="greeting">Hi {{ user.nickname }}. Looks like you haven't set up your pseudonym. Head to the <a href="/profile">profile</a> page to get set up!</p>
   {% endif %}
 
   <p>OPing, OPong, baby. Get your paddle ready, because OPOWER's ping pong torunament is back!</p>
 
   <h3>Leader Board</h3>
   {% include "partials/players_table.html" %}
+  
+  <p><a href="/players">View all players.</a></p>
 
-  <h3>Recent Games</h3>
-  {% include "partials/completed_games.html" %}
+  <h3 class="no-border">Recent Games</h3>
+  <p>Visit <a href="/games">all games</a>.</p>
 {% endblock %}
