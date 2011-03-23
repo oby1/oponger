@@ -72,6 +72,31 @@
             return true;
         });
 
+        // Attach form validation to all complete-game forms
+        $('#profile-update-form').submit(function() {
+
+            // Get all of the input values
+            var $inputs = $(':input', this);
+            var values = {};
+            $inputs.each(function() {
+                values[this.name] = $(this).val();
+            });
+
+            values.pseudonym = values.pseudonym.trim()
+
+            if(!values.pseudonym) {
+                $('.error', this).html("You've gotta have a pseudonym.");
+                return false;
+            }
+
+            if(values.pseudonym.length > 15) {
+                $('.error', this).html("Please keep your pseudonym up to 15 characters long.");
+                return false;
+            }
+
+            return true;
+        });
+
     });
 
 })();

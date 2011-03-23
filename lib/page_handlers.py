@@ -83,7 +83,11 @@ class Rulez(BaseHandler):
 class UpdateProfile(BaseHandler):
   def DoPost(self):
     logging.info("Updating player info")
-    self.player.pseudonym = escape(self.request.get('pseudonym'))
+    pseudonym = escape(self.request.get('pseudonym'))
+    if pseudonym != self.player.pseudonym and len(pseudonym) > 15:
+      raise Exception("If you update a pseudonym, it must be no more thn 15 characters long.")
+
+    self.player.pseudonym = pseudonym
     (lat, lon) = self.request.get('location').split(',')
     self.player.location = GeoPt(lat, lon)
     self.player.put()

@@ -7,7 +7,7 @@
   <h2>{{ player.pseudonym }}</h2>
 
   <h3>Update your info</h3>
-  <form action="/profile/update" method="post">
+  <form id="profile-update-form" action="/profile/update" method="post">
     <input type="hidden" name="redirect_path" value="{{redirect_path}}" />
     <label for="pseudonym">Psudonym</label>
     <input type="text" name="pseudonym" class="t" value="{{ player.pseudonym }}" />
@@ -24,6 +24,7 @@
     </input>
     {% endfor %}
     <input type="submit" class="s" value="Update" />
+    <p class="error"></p>
   </form>
   <hr />
   <h2>Avatar</h2>
