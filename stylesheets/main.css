@@ -77,6 +77,11 @@ p {
     border: none !important;
 }
 
+.note {
+    color: #333;
+    font-size: 10px;
+}
+
 .rounded {
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -306,6 +311,29 @@ ul.game-list .interactions .complete-game {
     color: #000000;
 }
 
+/* Completed Games */
+ul.completed-games .title {
+    font-size: 24px;
+}
+ul.completed-games .title .versus {
+    display: inline;
+    font-size: 24px;    
+}
+
+
+ul.game-list a.winner {
+    color: #ffc000;
+}
+
+ul.game-list .loser {
+    text-decoration: line-through;
+}
+
+ul.completed-games .scores {
+    font-size: 40px;
+	font-family: 'ChunkFiveRegular';
+    text-align: center;
+}
 
 /* Complete game */
 

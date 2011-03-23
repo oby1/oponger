@@ -22,6 +22,7 @@
         // Attach dialog to complete game link
         $('.complete-game').click(function(){
             $('#complete-game-wrapper').dialog({
+                closeText: 'hide',
                 draggable: false,
                 modal: true,
                 resizable: false,
