@@ -1,6 +1,6 @@
 <h3>Available Games</h3>
 {% if available_games %}
-<ul class="available">
+<ul class="game-list">
   {% for game in available_games %}
   <li class="rounded clearfix">
      <div class="info">
@@ -12,14 +12,14 @@
      {% else %}
 
          <form action="/game/join" method="post">
-       <input type="hidden" name="redirect_path" value="{{redirect_path}}" />
-       <input type="hidden" name="game_id" value="{{ game.key.id }}" />
-       <input type="submit" class="s" value="Join" />
+            <input type="hidden" name="redirect_path" value="{{redirect_path}}" />
+            <input type="hidden" name="game_id" value="{{ game.key.id }}" />
+            <input type="submit" class="s" value="Join" />
          </form>
      {% endifequal %}
   </li>
   {% endfor %}
 </ul>
 {% else %}
-No available games.
+    <p>No available games.</p>
 {% endif %}

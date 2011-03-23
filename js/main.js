@@ -19,8 +19,19 @@
             return Math.abs(score_1 - score_2) >= 2;
         }
 
+        // Attach dialog to complete game link
+        $('.complete-game').click(function(){
+            $('#complete-game-wrapper').dialog({
+                draggable: false,
+                height: 300,
+                modal: true,
+                resizable: false,
+                width: 500
+            });
+        });
+
         // Attach form validation to all complete-game forms
-        $('.complete-game').submit(function() {
+        $('#complete-game-form').submit(function() {
 
             // Get all of the input values
             var $inputs = $(':input', this);

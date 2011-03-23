@@ -65,6 +65,10 @@ p {
 
 /* Global Styles */
 
+.hide {
+    display: none;
+}
+
 .no-border {
     border: none !important;
 }
@@ -153,7 +157,8 @@ input.t {
     border-radius: 15px;
 }
 
-input.s {
+input.s,
+a.button-link {
     background: #ffc000 url(/images/diag.png) 0 0;
     border: none;
     font-size: 14px;
@@ -165,9 +170,26 @@ input.s {
     border-radius: 15px;
 }
 
-input.s:hover {
+input.s:hover,
+a.button-link:hover {
     background-color: #ff7200;
     cursor: hand;
+}
+
+
+input.cancel {
+    background: none;
+    color: #999;
+    padding: 0;
+    
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+input.cancel:hover {
+    background: none;
+    color: #ffffff;
 }
 
 =======
@@ -188,61 +210,83 @@ table td {
     padding: 10px 0px;
 }
 
+table .player img {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;    
+}
+
 /* Available/Active Games List*/
 
-ul.available li,
-ul.active li {
-    background: rgba(256,256,256,0.1);
-    height: 80px;
+ul.game-list li {
+    background: rgba(0,0,0,0.2);
     margin-bottom: 20px;
 }
 
-ul.available li a {
-    display: block;
-    font-weight: bold;
+ul.game-list li a {
     text-transform: uppercase;
 }
 
-ul.available .info,
-ul.active .info {
+ul.game-list .title {
+    font-size: 30px;
+	font-family: 'ChunkFiveRegular';
+	letter-spacing: .05em;
+	padding: 20px 10px 10px;
+	text-align: center;
+}
+
+ul.game-list .title a {
+    color: #777;
+}
+
+ul.game-list .versus {
+    display: block;
+    font-size: 34px;
+    line-height: 32px;
+    /* Rotate */
+    -webkit-transform: rotate(-7deg);
+    -moz-transform: rotate(-7deg);
+    /* Shadow */
+    text-shadow: 2px 2px 0px #000000;
+    filter: dropshadow(color=#000000, offx=2, offy=2)
+}
+
+ul.game-list .creation-date {
+    color: #333;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px 0;
+}
+
+ul.game-list .interactions .left,
+ul.game-list .interactions .right {
+    margin: 20px 0 20px;
+    width: 280px;
+}
+
+ul.game-list .interactions .left {
     float: left;
     margin-left: 20px;
-    padding: 20px 0;
-    width: 460px;
+    text-align: right;
 }
 
-ul.available input,
-ul.active input.cancel {
-    float: left;
-    height: 80px;
-    margin: 0 0 0 20px;
-    width: 120px;
-
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
-    -webkit-border-bottom-left-radius: 0;
-    -moz-border-radius-bottomleft: 0;
-    border-bottom-left-radius: 0;
-
-    -webkit-border-top-left-radius: 0;
-    -moz-border-radius-topleft: 0;
-    border-top-left-radius: 0;
-
+ul.game-list .interactions .right {
+    float: right;
+    margin-right: 20px;
+    text-align: left;
 }
 
-ul.active li,
-ul.active input.cancel {
-    height: 120px;
+ul.game-list .interactions .cancel {
+    color: #333;
+    font-family: Verdana, Helvetica, sans-serif;
+    text-decoration: underline;
 }
 
-ul.active th {
-    text-align: center;
+
+ul.game-list .interactions .complete-game {
+    color: #000000;
 }
 
-input.cancel {
-    background-color: #444;
-}
 
 input.score {
     margin: 0;

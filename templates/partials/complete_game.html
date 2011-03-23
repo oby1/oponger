@@ -1,12 +1,15 @@
-<form class="complete-game" action="/game/complete" method="post">
-  <label type="text" for="player_1_score">{{ game.player_1.pseudonym }}'s score</label>
-  <input type="text" name="player_1_score" class="t" />
-  <br />
-  <label type="text" for="player_2_score">{{ game.player_2.pseudonym }}'s score</label>
-  <input type="text" name="player_2_score" class="t" />
+<a href="#" class="complete-game button-link">Complete game</a>
+<div id="complete-game-wrapper" class="hide">
+    
+    <form id="complete-game-form" action="/game/complete" method="post">
 
-  <input type="hidden" name="game_id" value="{{ game.key.id }}" />
-  <br />
-  <input type="submit" class="s" value="Complete" />
-  <p class="error"></p>
-</form>
+      <input type="text" name="player_1_score" class="t player-1-score" />
+      <input type="text" name="player_2_score" class="t player-2-score" />
+
+      <input type="hidden" name="game_id" value="{{ game.key.id }}" />
+      <br />
+      <input type="submit" class="s" value="Complete" />
+      <p class="error"></p>
+    </form>
+
+</div>
