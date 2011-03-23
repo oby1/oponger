@@ -23,7 +23,6 @@
         $('.complete-game').click(function(){
             $('#complete-game-wrapper').dialog({
                 draggable: false,
-                height: 300,
                 modal: true,
                 resizable: false,
                 width: 500

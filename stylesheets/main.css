@@ -15,6 +15,10 @@ a {
     text-decoration: none;
 }
 
+a,input {
+    outline: none;
+}
+
 a:hover,
 ul.meta-nav a:hover,
 ul.navigation a:hover {
@@ -235,8 +239,13 @@ ul.game-list .title {
 	text-align: center;
 }
 
-ul.game-list .title a {
+ul.game-list .title a,
+ul.game-list .title .no-opponent {
     color: #777;
+}
+
+ul.game-list .title a:hover {
+    color: #fff;
 }
 
 ul.game-list .versus {
@@ -256,6 +265,16 @@ ul.game-list .creation-date {
     text-align: center;
     text-transform: uppercase;
     padding: 10px 0;
+}
+
+ul.game-list .interactions-center {
+    padding: 10px 0;
+    text-align: center;
+}
+
+ul.game-list .interactions-center .join {
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 ul.game-list .interactions .left,
@@ -288,32 +307,51 @@ ul.game-list .interactions .complete-game {
 }
 
 
-input.score {
+/* Complete game */
+
+#complete-game-wrapper {
+    text-align: center;
+}
+
+#complete-game-wrapper h3 {
+   margin: 0;
+}
+
+#complete-game-wrapper .player-1,
+#complete-game-wrapper .player-2 {
+    float: left;
+    margin-bottom: 20px;
+    padding: 10px;
+    text-align: right;
+    width: 45%;
+}
+
+#complete-game-wrapper .player-2 {
+    float: right;
+    text-align: left;
+}
+
+#complete-game-wrapper label {
+    display: block;
+    color: #999;
+    text-transform: uppercase;
+}
+
+#complete-game-wrapper input.score {
+    background: none;
+    color: #fff;
+    border-bottom: 2px dashed #fff;
+    font-size: 30px;
     margin: 0;
-    width: 40px;
-}
-
-input.player-1-score {
-    -webkit-border-bottom-right-radius: 0;
-    -moz-border-radius-bottomright: 0;
-    border-bottom-right-radius: 0;
-
-    -webkit-border-top-right-radius: 0;
-    -moz-border-radius-topright: 0;
-    border-top-right-radius: 0;
-
-}
-
-input.player-2-score {
-    -webkit-border-bottom-left-radius: 0;
-    -moz-border-radius-bottomleft: 0;
-    border-bottom-left-radius: 0;
-
-    -webkit-border-top-left-radius: 0;
-    -moz-border-radius-topleft: 0;
-    border-top-left-radius: 0;
+    text-align: center;
+    width: 100%;
+    
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
 }
 
 .error {
     color: red;
 }
+
