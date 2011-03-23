@@ -25,6 +25,17 @@
     {% endfor %}
     <input type="submit" class="s" value="Update" />
   </form>
+  <hr />
+  <h2>Avatar</h2>
+  <p>{% gravatar_img_for_email player.user.email %}</p>
+  <p>
+    We're using <a href="http://www.gravatar.com">Gravatar</a> for the profile pictures.
+    If you see an image of Dylan, that either means that:
+    <ol>
+        <ul>a. You don't have a Gravatar image. <a href="http://en.gravatar.com/">Go set one up!</a></ul>
+        <ul>b. You are Dylan</ul>
+    </ol>
+  </p>
 
 {% endblock %}
 
