@@ -3,9 +3,11 @@
 {% block title %}GAMES{% endblock %}
 
 {% block content %}
+
+  <h2>Games</h2>
+
   {% include "partials/new_game.html" %}
   {% include "partials/active_games.html" %}
   {% include "partials/available_games.html" %}
-  <h2>Completed Games</h2>
   {% include "partials/completed_games.html" %}
 {% endblock %}

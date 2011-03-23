@@ -26,6 +26,10 @@ h1,h2,h3,h4,h5,h6, ul, ol {
     padding: 0;
 }
 
+ul, ol {
+    list-style-type: none;
+}
+
 h1 {
 	font-family: 'MolotRegular';
 	font-size: 120px;
@@ -45,6 +49,14 @@ h2 {
     margin: 40px 0 20px;
 }
 
+h3 {
+    border-top: 1px solid #aaa;
+    font-size: 30px;
+    line-height: 34px;
+    padding-top: 20px;
+    margin: 40px 0 10px;
+}
+
 p {
     font-size: 16px;
     line-height: 24px;
@@ -52,6 +64,10 @@ p {
 }
 
 /* Global Styles */
+
+.no-border {
+    border: none !important;
+}
 
 .rounded {
     -webkit-border-radius: 20px;
@@ -82,7 +98,6 @@ p {
 /* BLOCK: Navigation */
 
 ul.navigation, ul.meta-nav {
-    list-style-type: none;
     z-index: 3;
 }
 
@@ -139,7 +154,7 @@ input.t {
 }
 
 input.s {
-    background: #ffc000;
+    background: #ffc000 url(/images/diag.png) 0 0;
     border: none;
     font-size: 14px;
 	font-family: 'ChunkFiveRegular';
@@ -151,6 +166,105 @@ input.s {
 }
 
 input.s:hover {
-    background: #ff7200;
+    background-color: #ff7200;
     cursor: hand;
+}
+
+/* Tables (*cringe*) */
+
+table {
+    margin-bottom: 20px;
+}
+
+table th {
+    text-align: left;
+}
+
+
+table td {
+    border-bottom: 1px dashed #aaa;
+    margin: 0;
+    padding: 10px 0px;
+}
+
+/* Available/Active Games List*/
+
+ul.available li,
+ul.active li {
+    background: rgba(256,256,256,0.1);
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+ul.available li a {
+    display: block;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+ul.available .info,
+ul.active .info {
+    float: left;
+    margin-left: 20px;
+    padding: 20px 0;
+    width: 460px;
+}
+
+ul.available input,
+ul.active input.cancel {
+    float: left;
+    height: 80px;
+    margin: 0 0 0 20px;
+    width: 120px;
+    
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-bottom-left-radius: 0;
+    
+    -webkit-border-top-left-radius: 0;
+    -moz-border-radius-topleft: 0;
+    border-top-left-radius: 0;
+
+}
+
+ul.active li,
+ul.active input.cancel {
+    height: 120px;
+}
+
+ul.active th {
+    text-align: center;
+}
+
+input.cancel {
+    background-color: #444;
+}
+
+input.score {
+    margin: 0;
+    width: 40px;
+}
+
+input.player-1-score {
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-bottomright: 0;
+    border-bottom-right-radius: 0;
+    
+    -webkit-border-top-right-radius: 0;
+    -moz-border-radius-topright: 0;
+    border-top-right-radius: 0;
+    
+}
+
+input.player-2-score {
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-bottom-left-radius: 0;
+    
+    -webkit-border-top-left-radius: 0;
+    -moz-border-radius-topleft: 0;
+    border-top-left-radius: 0;
 }

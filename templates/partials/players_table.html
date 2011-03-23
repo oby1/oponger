@@ -1,21 +1,19 @@
-<table>
+<table width="100%">
     <tr>
-        <th></th>
-        <th>Rank</th>
-        <th>Pseudonym</th>
-        <th>Nym</th>
-        <th>Location</th>
+        <th width="15%"></th>
+        <th width="15%">Rank</th>
+        <th width="55%">Player</th>
+        <th width="15%">Office</th>
     </tr>
     {% for player in players %}
     <tr class="player">
         <td>{% gravatar_img_for_email player.user.email %}</td>
         <td>{{ player.rank|floatformat:"0" }}</td>
         <td><a href="/player/{{player.key.name}}">{{ player.pseudonym }}</a></td>
-        <td>{{ player.user.nickname }}</td>
         {% for location in locations %}
-        {% ifequal location.geoPt.lat player.location.lat %}
-        <td>{{ location.name }}</td>
-        {% endifequal %}
+            {% ifequal location.geoPt.lat player.location.lat %}
+            <td>{{ location.name }}</td>
+            {% endifequal %}
         {% endfor %}
     </tr>
     {% endfor %}
