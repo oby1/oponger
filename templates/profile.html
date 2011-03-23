@@ -27,11 +27,13 @@
   </form>
   <hr />
   <h2>Avatar</h2>
-  <p>{% gravatar_img_for_email player.user.email %}</p>
-  <p>
-    We're using <a href="http://www.gravatar.com">Gravatar</a> for the profile pictures.
-    If you don't have a Gravatar image, <a href="http://en.gravatar.com/">go set one up!</a>
-  </p>
+  <div class="gravatar grid_2 alpha">{% gravatar_img_for_email player.user.email %}</div>
+  <div class="grid_6 omega">
+      <p>
+          We're using <a href="http://www.gravatar.com">Gravatar</a> for the profile pictures.
+          If you don't have a Gravatar image, <a href="http://en.gravatar.com/">go set one up!</a>
+      </p>
+  </div>
 
 {% endblock %}
 

@@ -219,7 +219,8 @@ table td {
     padding: 10px 0px;
 }
 
-table .player img {
+table .player img,
+.gravatar img {
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;    

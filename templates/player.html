@@ -4,12 +4,17 @@
 
 {% block content %}
 
+    
   <h2>{{ player_to_show.pseudonym }}</h2>
+
 
   <table width="100%">
     <tr>
         <td width="30%"><strong>Pseudonym</strong></td>
-        <td width="70%">{{ player_to_show.pseudonym }}</td>
+        <td width="50%">{{ player_to_show.pseudonym }}</td>
+        <td rowspan="30%" class="gravatar" align="center" valign="top">
+            {% gravatar_img_for_email player.user.email %}
+        </td>
     </tr>
     <tr>
         <td><strong>Email</strong></td>
@@ -33,8 +38,8 @@
         <td>{{ stats.percent_win }}</td>
     </tr>
     <tr>
-        <td><strong>Wins/Losses</strong></td>
-        <td>{{ stats.wins }} / {{ stats.losses }}</td>
+        <td><strong>Wins - Losses</strong></td>
+        <td>{{ stats.wins }} - {{ stats.losses }}</td>
     </tr>                 
   </table>
 
