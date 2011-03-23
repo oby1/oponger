@@ -8,7 +8,7 @@
     </tr>
     {% for player in players %}
     <tr class="player">
-        <td>{% gravatar_img_for_email player.user.nickname %}</td>
+        <td>{% gravatar_img_for_email player.user.email %}</td>
         <td>{{ player.rank|floatformat:"0" }}</td>
         <td><a href="/player/{{player.key.name}}">{{ player.pseudonym }}</a></td>
         <td>{{ player.user.nickname }}</td>
