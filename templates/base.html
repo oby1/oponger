@@ -10,12 +10,13 @@ http://docs.djangoproject.com/en/dev/topics/templates/#template-inheritance
 <link type="text/css" rel="stylesheet" href="/stylesheets/grid.css" />
 <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
 <title>OPONGER :: {% block title %}{% endblock %}</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 <script src="/js/main.js"></script>
 </head>
 
 <body>
 <div class="wrapper">
-    
+
     <ul class="meta-nav">
         <li><a href="{{logout_url}}">Logout</a></li>
         {% if is_admin %}
@@ -24,7 +25,7 @@ http://docs.djangoproject.com/en/dev/topics/templates/#template-inheritance
     </ul>
     <div id="container" class="container_12 rounded clearfix">
         <div id="main" class="grid_8 prefix_4">
-            
+
             <ul class="navigation" class="clearfix">
                 <li><a href="/">Home</a></li>
                 <li><a href="/rulez">Rulez</a></li>
@@ -32,7 +33,7 @@ http://docs.djangoproject.com/en/dev/topics/templates/#template-inheritance
                 <li><a href="/players">Players</a></li>
                 <li><a href="/profile">Profile</a></li>
             </ul>
-            
+
             <div id="content">
                 {% block content %}{% endblock %}
             </div>
