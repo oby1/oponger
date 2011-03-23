@@ -9,7 +9,8 @@ from django.utils import simplejson
 
 GRAVATAR_URL_PREFIX = getattr(settings, "GRAVATAR_URL_PREFIX",
                                       "http://www.gravatar.com/")
-GRAVATAR_DEFAULT_IMAGE = "http://www.gravatar.com/avatar/ee35bb0a4baef8f2b8fb395289999a88?s=80&amp;r=g"
+
+GRAVATAR_DEFAULT_IMAGE = "http://i.imgur.com/GADRJ.png"
 GRAVATAR_DEFAULT_RATING = getattr(settings, "GRAVATAR_DEFAULT_RATING", "g")
 GRAVATAR_DEFAULT_SIZE = getattr(settings, "GRAVATAR_DEFAULT_SIZE", 80)
 GRAVATAR_IMG_CLASS = getattr(settings, "GRAVATAR_IMG_CLASS", "gravatar")
