@@ -5,7 +5,7 @@ def stats(player):
   games = player.completed_games()
   wins = 0
   for game in games:
-    if game.winner().key() == player.key():
+    if game.winner.key() == player.key():
       wins += 1
 
   num_games = len(games)

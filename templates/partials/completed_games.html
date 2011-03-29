@@ -5,22 +5,19 @@
     <li class="game">
 
         <div class="title">
-            <a href="/player/{{game.player_1.key.name}}" 
-                {% if game.player_1_score > game.player_2_score %}
+            <a href="/player/{{game.player_1.key.name}}"
+                {% if game.winner.key == game.player_1.key %}
                     class="winner"
                 {% else %}
                     class="loser"
                 {% endif %}">{{ game.player_1.pseudonym }}</a>
             <span class="versus">VERSUS</span>
-            <a href="/player/{{game.player_2.key.name}}" 
-                {% if game.player_2_score > game.player_1_score %}
+            <a href="/player/{{game.player_2.key.name}}"
+                {% if game.winner.key == game.player_2.key %}
                     class="winner"
                 {% else %}
                     class="loser"
                 {% endif %}">{{ game.player_2.pseudonym }}</a>
-        </div>
-        <div class="scores">
-            {{ game.player_1_score }} - {{ game.player_2_score }}
         </div>
 
         <div class="creation-date">

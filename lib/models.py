@@ -47,8 +47,7 @@ class Game(db.Model):
   player_1 = db.ReferenceProperty(Player, collection_name='game_set_1')
   """The player who joined the game."""
   player_2 = db.ReferenceProperty(Player, collection_name='game_set_2')
-  player_1_score = db.IntegerProperty()
-  player_2_score = db.IntegerProperty()
+  winner = db.ReferenceProperty(Player, collection_name='game_won_set')
 
   def __str__(self):
     return "[Player_1: %s, Player_2: %s, Created: %s]" % (self.player_1, self.player_2, self.created_date)
@@ -61,11 +60,6 @@ class Game(db.Model):
 
   def is_completed(self):
     return self.completed_date != None
-
-  def winner(self):
-    if self.completed_date == None:
-      raise Exception("Can't have a winner for a game which hasn't been completed")
-    return self.player_1 if self.player_1_score > self.player_2_score else self.player_2
 
   @staticmethod
   def all_active():

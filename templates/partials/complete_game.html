@@ -1,31 +1,29 @@
 <a href="#" class="complete-game button-link">Complete game</a>
 <div id="complete-game-wrapper" class="hide">
 
-    <h3 class="no-border">Enter game scores</h3>
+    <h3 class="no-border">Select Game Winner</h3>
 
-    <form id="complete-game-form" action="/game/complete" method="post">
         <div class="clearfix">
-            
+
             <div class="player-1">
-                <label for="player_1_score">{{game.player_1.pseudonym}}</label>
-                <input type="text" name="player_1_score" class="t player-1-score score" />            
+                <form id="complete-game-form" action="/game/complete" method="post">
+                    <input type="hidden" name="game_id" value="{{ game.key.id }}" />
+                    <input type="hidden" name="player_1_won" value="true"/>
+                    <input type="submit" class="s" value="{{game.player_1.pseudonym}}" />
+                </form>
             </div>
 
             <div class="player-2">
-                <label for="player_2_score">{{game.player_2.pseudonym}}</label>
-                <input type="text" name="player_2_score" class="t player-2-score score" />            
+                <form id="complete-game-form" action="/game/complete" method="post">
+                    <input type="hidden" name="game_id" value="{{ game.key.id }}" />
+                    <input type="hidden" name="player_2_won" value="true"/>
+                    <input type="submit" class="s" value="{{game.player_2.pseudonym}}" />
+                </form>
             </div>
 
         </div>
-        
-        <input type="hidden" name="game_id" value="{{ game.key.id }}" />
-        
-        <input type="submit" class="s" value="Complete" />
-        
-        <p class="error"></p>
-        
+
         <p class="note">"ESC" to cancel</p>
 
-    </form>
 
 </div>

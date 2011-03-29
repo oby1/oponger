@@ -30,48 +30,6 @@
             });
         });
 
-        // Attach form validation to all complete-game forms
-        $('#complete-game-form').submit(function() {
-
-            // Get all of the input values
-            var $inputs = $(':input', this);
-            var values = {};
-            $inputs.each(function() {
-                values[this.name] = $(this).val();
-            });
-
-            // Run some simple sanity checks
-            if(!values.player_1_score || !values.player_2_score) {
-                $('.error', this).html('Player scores are required.');
-                return false;
-            }
-
-            if(!is_int(values.player_1_score) || !is_int(values.player_2_score)) {
-                $('.error', this).html('Player scores must be valid integers.');
-                return false;
-            }
-
-            var player_1_score = parseInt(values.player_1_score);
-            var player_2_score = parseInt(values.player_2_score);
-
-            if(!is_valid_score(player_1_score) || !is_valid_score(player_2_score)) {
-                $('.error', this).html('Player scores must be between 0 and 100.');
-                return false;
-            }
-
-            if(!is_min_points_to_win(player_1_score, player_2_score)) {
-                $('.error', this).html('One of the player scores must be larger than 21.');
-                return false;
-            }
-
-            if(!is_min_spread(player_1_score, player_2_score)) {
-                $('.error', this).html('The point spread must be at least 2.');
-                return false;
-            }
-
-            return true;
-        });
-
         // Attach form validation to all profile-update forms
         $('#profile-update-form').submit(function() {
 

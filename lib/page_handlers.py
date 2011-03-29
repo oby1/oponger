@@ -11,7 +11,6 @@ from elo import update_ranks
 
 from models import Player, Game
 from base_handler import BaseHandler
-from rules import validate_scores
 from stats import stats
 
 MAX_RECORDS = 100
@@ -139,13 +138,16 @@ class CompleteGame(BaseHandler):
     if game.completed_date != None:
       raise Exception("You can't complete a game that's already been completed, duderino!")
 
-    player_1_score = long(self.request.get('player_1_score'))
-    player_2_score = long(self.request.get('player_2_score'))
-    validate_scores(player_1_score, player_2_score)
+    player_1_won = bool(self.request.get('player_1_won'))
+    player_2_won = bool(self.request.get('player_2_won'))
+    if not player_1_won ^ player_2_won:
+      raise "One player, and only one player, can win a game."
 
     game.completed_date = datetime.now()
-    game.player_1_score = player_1_score
-    game.player_2_score = player_2_score
+    if player_1_won:
+      game.winner = game.player_1
+    else:
+      game.winner = game.player_2
 
     update_ranks(game)
 

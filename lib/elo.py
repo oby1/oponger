@@ -21,7 +21,7 @@ def update_ranks(game):
   expected_1 = expected(player_2.rank, player_1.rank)
   expected_2 = expected(player_1.rank, player_2.rank)
 
-  if game.player_1_score > game.player_2_score:
+  if game.winner == game.player_1:
     score_1 = 1
     score_2 = 0
   else:
