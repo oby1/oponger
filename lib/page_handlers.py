@@ -111,7 +111,7 @@ class JoinGame(BaseHandler):
     game.put()
     logging.info("Player %s joined game %s" % (self.player, game))
     send_email(game.player_1.user, '%s has joined your game' % self.player.pseudonym,
-               'To view your games: http://oponger.opower.com/player/%s' % self.player.key().name)
+               'To view your games: http://oponger.opower.com/')
     self.redirect_to_redirect_path_or_home()
 
 class CancelGame(BaseHandler):
