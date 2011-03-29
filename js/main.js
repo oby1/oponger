@@ -72,7 +72,7 @@
             return true;
         });
 
-        // Attach form validation to all complete-game forms
+        // Attach form validation to all profile-update forms
         $('#profile-update-form').submit(function() {
 
             // Get all of the input values
