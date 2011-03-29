@@ -47,6 +47,8 @@ class Game(db.Model):
   player_1 = db.ReferenceProperty(Player, collection_name='game_set_1')
   """The player who joined the game."""
   player_2 = db.ReferenceProperty(Player, collection_name='game_set_2')
+  player_1_score = db.IntegerProperty()
+  player_2_score = db.IntegerProperty()
   winner = db.ReferenceProperty(Player, collection_name='game_won_set')
 
   def __str__(self):

@@ -7,12 +7,13 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 
-from lib.admin_handlers import MainPage, UpdateSchema
+from lib.admin_handlers import MainPage, UpdateSchema, UpdateWinnersFromOldSchema
 
 
 application = webapp.WSGIApplication(
   [('/admin/', MainPage),
-   ('/admin/update_schema', UpdateSchema)],
+   ('/admin/update_schema', UpdateSchema),
+   ('/admin/migrate_from_scores_to_winner_loser', UpdateWinnersFromOldSchema)],
   debug=True)
 
 def main():
