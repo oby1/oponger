@@ -12,6 +12,7 @@ from elo import update_ranks
 from models import Player, Game
 from base_handler import BaseHandler
 from stats import stats
+from oponger_email import send_email
 
 class MainPage(BaseHandler):
   def DoGet(self):
@@ -109,6 +110,8 @@ class JoinGame(BaseHandler):
     game.player_2 = self.player
     game.put()
     logging.info("Player %s joined game %s" % (self.player, game))
+    send_email(game.player_1.user, '%s has joined your game' % self.player.pseudonym,
+               'To view your games: http://oponger.opower.com/player/%s' % self.player.key().name)
     self.redirect_to_redirect_path_or_home()
 
 class CancelGame(BaseHandler):
