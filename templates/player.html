@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    
+
   <h2>{{ player_to_show.pseudonym }}</h2>
 
 
@@ -31,7 +31,7 @@
       {% endfor %}
     <tr>
         <td><strong>Rank</strong></td>
-        <td>{{ player_to_show.rank }}</td>
+        <td>{{ player_to_show.rank|floatformat:"0"  }}</td>
     </tr>
     <tr>
         <td><strong>Percent Win</strong></td>
@@ -40,7 +40,7 @@
     <tr>
         <td><strong>Wins - Losses</strong></td>
         <td>{{ stats.wins }} - {{ stats.losses }}</td>
-    </tr>                 
+    </tr>
   </table>
 
   {% include "partials/active_games.html" %}
