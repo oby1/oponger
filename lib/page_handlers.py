@@ -13,8 +13,6 @@ from models import Player, Game
 from base_handler import BaseHandler
 from stats import stats
 
-MAX_RECORDS = 100
-
 class MainPage(BaseHandler):
   def DoGet(self):
 
